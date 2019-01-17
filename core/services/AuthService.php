@@ -7,15 +7,16 @@ class AuthService
 {
     /**
      * @param string $login
-     * @param string $password_hash
+     * @param string $passwd
      * @return bool|User
+     * @throws Exception
      */
-    public static function login($login, $password_hash)
+    public static function login($login, $passwd)
     {
         $user = UserService::get_by_login($login);
 
         if ($user) {
-            $hash = md5($password_hash . $user->get_password_salt());
+            $hash = md5($passwd . $user->get_password_salt());
             if ($hash == $user->get_password_hash()) {
                 safe_session_start();
                 $_SESSION['active_user'] = $user;
@@ -26,25 +27,16 @@ class AuthService
         return false;
     }
 
-    /**
-     * @return bool
-     */
     public static function logout()
     {
         safe_session_start();
-
-        if (isset($_SESSION['active_user'])) {
-            unset($_SESSION['active_user']);
-            return true;
-        } else {
-            return false;
-        }
+        unset($_SESSION['active_user']);
     }
 
     /**
      * @return bool|User
      */
-    public static function get_current_user()
+    public static function get_active_user()
     {
         safe_session_start();
 
@@ -55,15 +47,18 @@ class AuthService
     }
 
     /**
-     * @param int $acct_type
-     * @return bool
+     * @param string $name
+     * @return bool|array
+     * @throws Exception
      */
-    public static function auth_user_create($acct_type)
+    public static function get_permission_by_name($name)
     {
-        $current_user = self::get_current_user();
-        $current_user = $current_user ? $current_user->get_acct_type() : AccountType::NONE;
+        $name = strtolower($name);
+        $result = DataService::select('permissions', ['name' => $name]);
 
-        return AccountType::compare($current_user, AccountType::ADVISOR) >= 0
-            && AccountType::compare($current_user, $acct_type) > 0;
+        if (!$result || $result->num_rows == 0)
+            return false;
+        else
+            return $result->fetch_assoc();
     }
 }

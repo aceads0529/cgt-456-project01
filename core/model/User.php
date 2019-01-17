@@ -4,7 +4,7 @@ require_once __DIR__ . '/../includes.php';
 
 class User
 {
-    private $id, $login, $pswd_hash, $pswd_salt, $first_name, $last_name, $acct_type, $email, $phone;
+    private $id, $login, $pswd_hash, $pswd_salt, $first_name, $last_name, $email, $phone;
 
     /**
      * User constructor.
@@ -14,11 +14,10 @@ class User
      * @param string $password_salt
      * @param string $first_name
      * @param string $last_name
-     * @param int $acct_type
      * @param string $email
      * @param string $phone
      */
-    public function __construct($id, $login, $password_hash, $password_salt, $first_name, $last_name, $acct_type, $email, $phone)
+    public function __construct($id, $login, $password_hash, $password_salt, $first_name, $last_name, $email, $phone)
     {
         $this->id = $id;
         $this->login = $login;
@@ -26,24 +25,8 @@ class User
         $this->pswd_salt = $password_salt;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
-        $this->acct_type = $acct_type;
         $this->email = $email;
         $this->phone = $phone;
-    }
-
-    public function json()
-    {
-        return [
-            'id' => $this->get_id(),
-            'login' => $this->get_login(),
-            'pswd_hash' => $this->get_password_hash(),
-            'pswd_salt' => $this->get_password_hash(),
-            'firstName' => $this->get_first_name(),
-            'lastName' => $this->get_last_name(),
-            'acctType' => AccountType::to_string($this->get_acct_type()),
-            'email' => $this->get_email(),
-            'phone' => $this->get_phone()
-        ];
     }
 
     /**
@@ -92,14 +75,6 @@ class User
     public function get_last_name()
     {
         return $this->last_name;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function get_acct_type()
-    {
-        return $this->acct_type;
     }
 
     /**
