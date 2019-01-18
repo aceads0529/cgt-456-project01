@@ -1,9 +1,11 @@
 <?php
 require_once __DIR__ . '/model/User.php';
+require_once __DIR__ . '/model/UserGroup.php';
 
 require_once __DIR__ . '/services/DataService.php';
 require_once __DIR__ . '/services/AuthService.php';
 require_once __DIR__ . '/services/UserService.php';
+require_once __DIR__ . '/services/UserGroupService.php';
 
 
 /**

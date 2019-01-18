@@ -10,25 +10,20 @@ safe_session_start();
 </head>
 <body>
 
-<h1>Login page</h1>
-
-<?php
-
-$user = AuthService::get_active_user();
-if ($user) {
-    echo  $user->get_user_group()->get_id();
-}
-
-?>
+<h1>Register page</h1>
 
 <?php if ($user = AuthService::get_active_user()): ?>
     <h2>Hello, <?php echo $user->get_first_name(); ?>!</h2>
-    <h3><?php echo $user->get_user_group()->get_name(); ?></h3>
 <?php endif; ?>
 
-<form id="login-form">
+<form id="register-form">
     <input id="login" type="text" placeholder="username"/>
     <input id="password" type="password" placeholder="password"/>
+    <input id="first-name" type="text" placeholder="username"/>
+    <input id="last-name" type="text" placeholder="username"/>
+
+    <input id="email" type="text" placeholder="username"/>
+    <input id="phone" type="text" placeholder="username"/>
 
     <input type="submit" value="Login"/>
     <button id="logout">Logout</button>
@@ -56,8 +51,10 @@ if ($user) {
             // Make API call
             api_user('login', {login: login, password: password}, function (response) {
                 // Determine whether username and password a correct
-                if (response.error) {
+                if (response.error !== 0) {
                     alert(response.message);
+                } else {
+                    alert('Login successful!');
                 }
 
                 location.reload();
@@ -70,7 +67,7 @@ if ($user) {
             e.stopPropagation();
 
             api_user('logout', {}, function (response) {
-                if (response.error) {
+                if (response.error !== 0) {
                     alert(response.message);
                 }
 

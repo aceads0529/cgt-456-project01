@@ -8,10 +8,15 @@
 
 class DataService
 {
-    const HOST = 'www.aaroneads.com:3306';
-    const USER = 'admin';
-    const PSWD = 'Ascii32';
+    const HOST = 'localhost';
+    const USER = 'root';
+    const PSWD = '';
     const DATABASE = 'cgt456_project01';
+
+//    const HOST = 'www.aaroneads.com:3306';
+//    const USER = 'admin';
+//    const PSWD = 'Ascii32';
+//    const DATABASE = 'cgt456_project01';
 
     /**
      * @return mysqli

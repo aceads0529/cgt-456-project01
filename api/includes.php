@@ -12,10 +12,3 @@ function exit_server_error($message = '')
 {
     exit_response(1, 'Internal server error', ['error' => $message]);
 }
-
-function assert_true_or_exit($stmt, $message = '')
-{
-    if (!$stmt) {
-        exit_response(1, $message);
-    }
-}

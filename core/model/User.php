@@ -4,25 +4,26 @@ require_once __DIR__ . '/../includes.php';
 
 class User
 {
-    private $id, $login, $pswd_hash, $pswd_salt, $first_name, $last_name, $email, $phone;
+    private $id, $login, $user_group, $passwd_hash, $passwd_salt, $first_name, $last_name, $email, $phone;
 
     /**
-     * User constructor.
      * @param int $id
      * @param string $login
-     * @param string $password_hash
-     * @param string $password_salt
+     * @param UserGroup $user_group
+     * @param string $passwd_hash
+     * @param string $passwd_salt
      * @param string $first_name
      * @param string $last_name
      * @param string $email
      * @param string $phone
      */
-    public function __construct($id, $login, $password_hash, $password_salt, $first_name, $last_name, $email, $phone)
+    public function __construct($id, $login, $user_group, $passwd_hash, $passwd_salt, $first_name, $last_name, $email, $phone)
     {
         $this->id = $id;
         $this->login = $login;
-        $this->pswd_hash = $password_hash;
-        $this->pswd_salt = $password_salt;
+        $this->user_group = $user_group;
+        $this->passwd_hash = $passwd_hash;
+        $this->passwd_salt = $passwd_salt;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
         $this->email = $email;
@@ -46,11 +47,19 @@ class User
     }
 
     /**
+     * @return UserGroup
+     */
+    public function get_user_group()
+    {
+        return $this->user_group;
+    }
+
+    /**
      * @return mixed
      */
     public function get_password_hash()
     {
-        return $this->pswd_hash;
+        return $this->passwd_hash;
     }
 
     /**
@@ -58,7 +67,7 @@ class User
      */
     public function get_password_salt()
     {
-        return $this->pswd_salt;
+        return $this->passwd_salt;
     }
 
     /**

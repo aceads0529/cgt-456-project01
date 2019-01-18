@@ -11,8 +11,14 @@ switch ($action) {
     case 'logout':
         logout();
         break;
+    case 'select':
+        select($data);
+        break;
+    case 'register':
+        register($data);
+        break;
     case 'create':
-        // create($data);
+        create($data);
         break;
 }
 
@@ -20,11 +26,10 @@ function login($data)
 {
     try {
         if ($user = AuthService::login($data['login'], $data['password']))
-            exit_response(0);
+            exit_response(false);
         else
-            exit_response(1, 'Username and passwords do not match');
+            exit_response(true, 'Username and passwords do not match');
     } catch (Exception $e) {
-        throw $e;
         exit_server_error($e->getMessage());
     }
 }
@@ -32,12 +37,64 @@ function login($data)
 function logout()
 {
     AuthService::logout();
-    exit_response(0);
+    exit_response(false);
+}
+
+function select($data)
+{
+    // TODO: Authorize API call
+}
+
+function register($data)
+{
+    _sanitize_user_request($data);
+
+    if (!_validate_user_request($data)) {
+        exit_response(true, 'Invalid user data');
+    } else {
+        try {
+            AuthService::register_new_user(
+                $data['login'],
+                $data['passwd'],
+                $data['permissions'],
+                $data['firstName'],
+                $data['lastName'],
+                $data['email'],
+                $data['phone']);
+            exit_response(false);
+        } catch (Exception $e) {
+            exit_server_error($e->getMessage());
+        }
+    }
+}
+
+function create($data)
+{
+    // TODO: Authorize API call
+
+    _sanitize_user_request($data);
+
+    if (!_validate_user_request($data)) {
+        exit_response(true, 'Invalid user data');
+    } else {
+        try {
+            UserService::create_new_user(
+                $data['login'],
+                $data['passwd'],
+                $data['permissions'],
+                $data['firstName'],
+                $data['lastName'],
+                $data['email'],
+                $data['phone']);
+        } catch (Exception $e) {
+            exit_server_error($e->getMessage());
+        }
+    }
 }
 
 function _sanitize_user_request(&$data)
 {
-    $data['acctType'] = AccountType::from_string($data['acctType']);
+    $data['permissions'] = strtolower($data['permissions']);
     $data['phone'] = preg_replace('/\D+/', '', $data['phone']);
 }
 

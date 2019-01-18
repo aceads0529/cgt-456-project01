@@ -13,13 +13,12 @@ class AuthService
      */
     public static function login($login, $passwd)
     {
-        $user = UserService::get_by_login($login);
+        $user = UserService::select_by_login($login);
 
         if ($user) {
             $hash = md5($passwd . $user->get_password_salt());
             if ($hash == $user->get_password_hash()) {
-                safe_session_start();
-                $_SESSION['active_user'] = $user;
+                self::set_active_user($user);
                 return $user;
             }
         }
@@ -47,18 +46,36 @@ class AuthService
     }
 
     /**
-     * @param string $name
-     * @return bool|array
+     * @param User $user
+     */
+    private static function set_active_user($user)
+    {
+        safe_session_start();
+        $_SESSION['active_user'] = $user;
+    }
+
+    /**
+     * @param string $login
+     * @param string $passwd
+     * @param int $user_group_id
+     * @param string $first_name
+     * @param string $last_name
+     * @param string $email
+     * @param int $phone
+     * @return User
      * @throws Exception
      */
-    public static function get_permission_by_name($name)
+    public static function register_new_user($login, $passwd, $user_group_id, $first_name, $last_name, $email, $phone)
     {
-        $name = strtolower($name);
-        $result = DataService::select('permissions', ['name' => $name]);
+        $p = UserGroupService::select_by_id($user_group_id);
 
-        if (!$result || $result->num_rows == 0)
-            return false;
-        else
-            return $result->fetch_assoc();
+        if (!$p)
+            throw new InvalidArgumentException('Permissions not found');
+        elseif (!$p->get_can_register())
+            throw new InvalidArgumentException('Invalid account type');
+        else {
+            $user = UserService::create_new_user($login, $passwd, $user_group_id, $first_name, $last_name, $email, $phone);
+            self::set_active_user($user);
+        }
     }
 }
