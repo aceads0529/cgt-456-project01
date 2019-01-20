@@ -8,7 +8,8 @@
 
 <body>
 <h1>Internship Report Form</h1>
-<form action="" method="post"> <!-- update action when connecting files -->
+<form action="studentFormDo.php" method="post"> <!-- update action when connecting files -->
+	<fieldset>
 Name of Student: <input type="text" name="name"><br>
 Campus: 
 <select name="campus">
@@ -33,7 +34,8 @@ Summer 2<input type="number" name="twoHours"><br>
 Summer 3<input type="number" name="threeHours"><br>
 Summer 4<input type="number" name="fourHours"><br>
 Total<input type="number" name="totalHours"><br>
-	
+	</fieldset>
+	<fieldset>
 Student Info<br>
 Students Email<input type="email" name="studentEmail"><br>
 Students Phone<input type="tel" name="studentPhone"><br>	
@@ -50,8 +52,8 @@ Student Classification at Purdue
 	<option value="freshman">Junior</option>
 	<option value="freshman">Senior</option>
 </select>
-	
-	
+</fieldset>	
+<fieldset>	
 <!-- The next section could potentially be put onto another page -->
 Job Title<br>
 Did you work in an office or on site?
@@ -81,7 +83,8 @@ Considering your overall experience—how would you rate this internship?<br>
 	<input type="radio" name="rate">Neutral<br>
 	<input type="radio" name="rate">Satisfied<br>
 	<input type="radio" name="rate">Very Satisfied<br>
-	
+</fieldset>
+<fieldset>	
 Company Information<br>
 	Name of Company<input type="text" name="companyName"><br>
 	Address of Home/Main Office<input type="text" name="companyAddress"><br>
@@ -96,11 +99,13 @@ Company Information<br>
 	<input type="checkbox" name="sector" value="web">Web<br>
 
 Location of office or jobsite where you worked if it is different than the main office<input type="text" name="differentAddress"><br>
-	
+</fieldset>
+<fieldset>	
 Name of Supervisor - direct<input type="text" name="supervisorName"><br>
 Supervisors email<input type="email" name="supervisorEmail"><br>
 Performance Review of Supervisor - Rate Employees work behaviors below: To be filled out by Supervisor<br>
-	
+</fieldset>
+<fieldset>	
 <!-- Supervisor review table -->
 Supervisors Review of Intern:<br>
 2=Exceptional 1=Average 0=Unacceptable<br>
@@ -254,7 +259,8 @@ Supervisors Review of Intern:<br>
 		<td><input type="radio" name="timeManagment"></td>
 	</tr>
 </table><br>
-	
+</fieldset>
+<fieldset>
 Salary/Hourly Rate<br>	
 Were you paid?<br>
 	<input type="radio" name="payment">Yes<br>
@@ -269,6 +275,8 @@ Did you receive any assistance from the company for your internship? Please sele
 	<input type="checkbox" name="finance" value="vehicle">Company Vehicle<br>
 	<input type="checkbox" name="finance" value="airfare">Paid Airfare or travel to/from internship location<br>
 	<input type="checkbox" name="finance" value="other">Other<br>
+</fieldset>
+	<input type="submit" name="submit" class="submit" value="Submit"/>
 </form>
 </body>
 </html>
