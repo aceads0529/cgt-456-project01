@@ -3,13 +3,15 @@
 class UserGroup
 {
     private $id, $name, $can_register, $access_level;
+    private $permissions;
 
-    public function __construct($id, $name, $can_register, $access_level)
+    public function __construct($id, $name, $can_register, $access_level, $permissions)
     {
         $this->id = $id;
         $this->name = $name;
         $this->can_register = $can_register;
         $this->access_level = $access_level;
+        $this->permissions = $permissions;
     }
 
     /**
@@ -42,5 +44,17 @@ class UserGroup
     public function get_access_level()
     {
         return $this->access_level;
+    }
+
+    /**
+     * @param string $code
+     * @return bool
+     */
+    public function has_permission($code)
+    {
+        if (isset($this->permissions[$code]) && (bool)$this->permissions[$code])
+            return true;
+        else
+            return false;
     }
 }

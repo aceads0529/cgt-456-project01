@@ -19,10 +19,15 @@ class UserGroupService
      */
     private static function create_user_group_from_row($row)
     {
+        $permissions = $row;
+        unset($permissions['id']);
+        unset($permissions['name']);
+
         return new UserGroup(
             $row['id'],
             $row['name'],
             $row['can_register'],
-            $row['access_level']);
+            $row['access_level'],
+            $permissions);
     }
 }

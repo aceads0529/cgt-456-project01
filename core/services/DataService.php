@@ -34,7 +34,10 @@ class DataService
      */
     public static function query($query_str, $values)
     {
-        return self::query_db(self::connect(), $query_str, $values);
+        $db = self::connect();
+        $result = self::query_db($db, $query_str, $values);
+        $db->close();
+        return $result;
     }
 
     /**
@@ -80,8 +83,6 @@ class DataService
         }
 
         $result = $stmt->get_result();
-        $db->close();
-
         return $result;
     }
 
@@ -119,7 +120,7 @@ class DataService
         $db = self::connect();
         self::query_db($db, $query_str, $values);
 
-        $id = $db->insert_id;
+        $id = mysqli_insert_id($db);
 
         $db->close();
         return $id;

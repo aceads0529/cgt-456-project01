@@ -54,6 +54,20 @@ class AuthService
         $_SESSION['active_user'] = $user;
     }
 
+    public static function has_permission($permission)
+    {
+        $user = self::get_active_user();
+
+        if ($user) {
+            if ($permission == 'user')
+                return true;
+            else
+                return $user->get_user_group()->has_permission($permission);
+        } else {
+            return false;
+        }
+    }
+
     /**
      * @param string $login
      * @param string $passwd
@@ -74,7 +88,7 @@ class AuthService
         elseif (!$p->get_can_register())
             throw new InvalidArgumentException('Invalid account type');
         else {
-            $user = UserService::create_new_user($login, $passwd, $user_group_id, $first_name, $last_name, $email, $phone);
+            $user = UserService::create($login, $passwd, $user_group_id, $first_name, $last_name, $email, $phone);
             self::set_active_user($user);
         }
     }

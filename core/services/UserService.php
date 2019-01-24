@@ -5,9 +5,20 @@ class UserService
 {
     const TABLE_USER = 'user';
 
+    /**
+     * @return User[]
+     * @throws Exception
+     */
     public static function select_all()
     {
+        $result = DataService::select(self::TABLE_USER);
+        $users = [];
 
+        while ($row = $result->fetch_assoc()) {
+            $users[] = self::create_user_from_row($row);
+        }
+
+        return $users;
     }
 
     /**
@@ -41,7 +52,7 @@ class UserService
      * @return User
      * @throws Exception
      */
-    public static function create_new_user($login, $passwd, $user_group, $first_name, $last_name, $email, $phone)
+    public static function create($login, $passwd, $user_group, $first_name, $last_name, $email, $phone)
     {
         $passwd_salt = md5(uniqid(rand(), true));
         $passwd_hash = md5($passwd . $passwd_salt);

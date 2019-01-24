@@ -7,19 +7,15 @@ safe_session_start();
 <html>
 <head>
     <title>Index</title>
+
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
 </head>
 <body>
 
 <h1>Login page</h1>
-
-<?php
-
-$user = AuthService::get_active_user();
-if ($user) {
-    echo  $user->get_user_group()->get_id();
-}
-
-?>
 
 <?php if ($user = AuthService::get_active_user()): ?>
     <h2>Hello, <?php echo $user->get_first_name(); ?>!</h2>
@@ -32,18 +28,17 @@ if ($user) {
 
     <input type="submit" value="Login"/>
     <button id="logout">Logout</button>
+
+    <p id="nametag"></p>
 </form>
 
 
-<script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-
 <script src="../scripts/api.js"></script>
-
 <script>
-    $(function () {
+    api.ready(function () {
+        if (api.user)
+            $('#nametag').text(api.user.firstName);
+
         $('#login-form').submit(function (e) {
             // Prevent page from reloading
             e.preventDefault();
@@ -54,13 +49,14 @@ if ($user) {
             const password = $('#password').val();
 
             // Make API call
-            api_user('login', {login: login, password: password}, function (response) {
+            api.call('user/login', {login: login, password: password}, function (response) {
                 // Determine whether username and password a correct
-                if (response.error) {
+                if (response.success) {
+                    // If there was no error, reload the page
+                    location.reload();
+                } else {
                     alert(response.message);
                 }
-
-                location.reload();
             });
         });
 
@@ -69,12 +65,12 @@ if ($user) {
             e.preventDefault();
             e.stopPropagation();
 
-            api_user('logout', {}, function (response) {
-                if (response.error) {
+            api.call('user/logout', {}, function (response) {
+                if (response.success) {
+                    location.reload();
+                } else {
                     alert(response.message);
                 }
-
-                location.reload();
             });
         });
     });

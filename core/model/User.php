@@ -30,6 +30,21 @@ class User
         $this->phone = $phone;
     }
 
+    public function to_json_array()
+    {
+        return [
+            'id' => $this->get_id(),
+            'login' => $this->get_login(),
+            'userGroupId' => $this->get_user_group()->get_id(),
+            'passwdHash' => $this->get_password_hash(),
+            'passwdSalt' => $this->get_password_salt(),
+            'firstName' => $this->get_first_name(),
+            'lastName' => $this->get_last_name(),
+            'email' => $this->get_email(),
+            'phone' => $this->get_phone(),
+        ];
+    }
+
     /**
      * @return mixed
      */
