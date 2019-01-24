@@ -88,14 +88,14 @@
 			<p>Name of Company <input type="text" name="companyName"></p>
 			<p>Address of Home/Main Office <input type="text" name="companyAddress"></p>
 			<p>Type/Sector of CGT Industry - select all that apply </p>
-				<p><input type="checkbox" name="cgt_fields" value="animation">Animation
-				<input type="checkbox" name="cgt_fields" value="construction">Construction
-				<input type="checkbox" name="cgt_fields" value="dataViz">Data Viz
-				<input type="checkbox" name="cgt_fields" value="game">Game
-				<input type="checkbox" name="cgt_fields" value="ux">UX
-				<input type="checkbox" name="cgt_fields" value="vpi">VPI
-				<input type="checkbox" name="cgt_fields" value="visefx">Vis EFX
-				<input type="checkbox" name="cgt_fields" value="web">Web</p>
+				<p><input type="checkbox" name="cgtFields" value="animation">Animation
+				<input type="checkbox" name="cgtFields" value="construction">Construction
+				<input type="checkbox" name="cgtFields" value="dataViz">Data Viz
+				<input type="checkbox" name="cgtFields" value="game">Game
+				<input type="checkbox" name="cgtFields" value="ux">UX
+				<input type="checkbox" name="cgtFields" value="vpi">VPI
+				<input type="checkbox" name="cgtFields" value="visefx">Vis EFX
+				<input type="checkbox" name="cgtFields" value="web">Web</p>
 			<p>Location of office or job site where you worked if it is different than the main office <input type="text" name="addressIfDifferent"></p>
 			</fieldset>
 			<fieldset>	
