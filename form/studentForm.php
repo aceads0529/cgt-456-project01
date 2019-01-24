@@ -3,6 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
     	<meta http-equiv="Content-Type" content="text/html; UTF-8" />
+    	<link rel="stylesheet" type="text/css" href="../general.css" />
+    	<link rel="stylesheet" type="text/css" href="../studentForm.css" />
 <!-- Student section of the form -->
 		<title>Student Form</title> 
 	</head>
