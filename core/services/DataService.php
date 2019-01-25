@@ -90,7 +90,7 @@ class DataService
      * @param string $table
      * @param array $params
      * @param string[] $columns
-     * @return mysqli_result
+     * @return bool|mysqli_result
      * @throws Exception
      */
     public static function select($table, $params = null, $columns = null)
@@ -101,7 +101,23 @@ class DataService
         $columns = $columns ? self::comma($columns) : '*';
 
         $query_str = sprintf('SELECT %s FROM %s %s', $columns, $table, $clause);
-        return self::query($query_str, $values);
+        $result = self::query($query_str, $values);
+
+        if (!$result || $result->num_rows == 0)
+            return false;
+        else
+            return $result;
+    }
+
+    /**
+     * @param string $table
+     * @param array $params
+     * @return bool
+     * @throws Exception
+     */
+    public static function exists($table, $params = null)
+    {
+        return (bool)self::select($table, $params);
     }
 
     /**
@@ -203,10 +219,13 @@ class DataService
 
             $values = [];
 
-            while ($item = current($params)) {
-                $columns[] = self::enclose(key($params), '``');
-                $values[] = $item;
-                $question_marks[] = '?';
+            while (($item = current($params)) !== false) {
+                if ($item != null) {
+                    $columns[] = self::enclose(key($params), '``');
+                    $values[] = $item;
+                    $question_marks[] = '?';
+                }
+
                 next($params);
             }
 

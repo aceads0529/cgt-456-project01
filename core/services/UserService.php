@@ -1,34 +1,35 @@
 <?php
 require_once __DIR__ . '/../includes.php';
 
-class UserService
+class UserService extends EntityService
 {
-    const TABLE_USER = 'user';
-
     /**
-     * @return User[]
-     * @throws Exception
+     * @return string
      */
-    public static function select_all()
+    public static function get_table_name()
     {
-        $result = DataService::select(self::TABLE_USER);
-        $users = [];
-
-        while ($row = $result->fetch_assoc()) {
-            $users[] = self::create_user_from_row($row);
-        }
-
-        return $users;
+        return 'user';
     }
 
     /**
-     * @param int $id
-     * @return bool|User
+     * @param array $row
+     * @return User
      * @throws Exception
      */
-    public static function select_by_id($id)
+    protected static function get_entity_from_row($row)
     {
-        return self::select_by_key('id', $id);
+        $user_group = UserGroupService::select_by_id($row['user_group_id']);
+
+        return new User(
+            $row['id'],
+            $row['login'],
+            $user_group,
+            $row['passwd_hash'],
+            $row['passwd_salt'],
+            $row['first_name'],
+            $row['last_name'],
+            $row['email'],
+            $row['phone']);
     }
 
     /**
@@ -44,6 +45,7 @@ class UserService
     /**
      * @param string $login
      * @param string $passwd
+     * @param int $advisor_id
      * @param UserGroup $user_group
      * @param string $first_name
      * @param string $last_name
@@ -52,12 +54,12 @@ class UserService
      * @return User
      * @throws Exception
      */
-    public static function create($login, $passwd, $user_group, $first_name, $last_name, $email, $phone)
+    public static function create($login, $passwd, $advisor_id, $user_group, $first_name, $last_name, $email, $phone)
     {
         $passwd_salt = md5(uniqid(rand(), true));
         $passwd_hash = md5($passwd . $passwd_salt);
 
-        $id = DataService::insert(self::TABLE_USER,
+        $id = DataService::insert(static::get_table_name(),
             [
                 'login' => $login,
                 'passwd_hash' => $passwd_hash,
@@ -69,6 +71,10 @@ class UserService
                 'phone' => $phone
             ]);
 
+        if ($advisor_id != null) {
+            DataService::insert('advisor_students', ['advisor_id' => $advisor_id, 'student_id' => $id]);
+        }
+
         return new User(
             $id,
             $login,
@@ -79,43 +85,5 @@ class UserService
             $last_name,
             $email,
             $phone);
-    }
-
-    /**
-     * @param string $key
-     * @param mixed $value
-     * @return bool|User
-     * @throws Exception
-     */
-    private static function select_by_key($key, $value)
-    {
-        $result = DataService::select(self::TABLE_USER, [$key => $value]);
-
-        if ($result && $result->num_rows > 0) {
-            return self::create_user_from_row($result->fetch_assoc());
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * @param array $row
-     * @return User
-     * @throws Exception
-     */
-    private static function create_user_from_row($row)
-    {
-        $user_group = UserGroupService::select_by_id($row['id']);
-
-        return new User(
-            $row['id'],
-            $row['login'],
-            $user_group,
-            $row['passwd_hash'],
-            $row['passwd_salt'],
-            $row['first_name'],
-            $row['last_name'],
-            $row['email'],
-            $row['phone']);
     }
 }

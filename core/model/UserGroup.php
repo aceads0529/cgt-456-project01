@@ -2,20 +2,28 @@
 
 class UserGroup
 {
-    private $id, $name, $can_register, $access_level;
+    private $id, $label, $can_register, $access_level;
     private $permissions;
 
-    public function __construct($id, $name, $can_register, $access_level, $permissions)
+    /**
+     * UserGroup constructor.
+     * @param string $id
+     * @param string $label
+     * @param bool $can_register
+     * @param int $access_level
+     * @param array $permissions
+     */
+    public function __construct($id, $label, $can_register, $access_level, $permissions)
     {
         $this->id = $id;
-        $this->name = $name;
-        $this->can_register = $can_register;
+        $this->label = $label;
+        $this->can_register = (bool)$can_register;
         $this->access_level = $access_level;
         $this->permissions = $permissions;
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function get_id()
     {
@@ -25,13 +33,13 @@ class UserGroup
     /**
      * @return string
      */
-    public function get_name()
+    public function get_label()
     {
-        return $this->name;
+        return $this->label;
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
     public function get_can_register()
     {
@@ -39,7 +47,7 @@ class UserGroup
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function get_access_level()
     {

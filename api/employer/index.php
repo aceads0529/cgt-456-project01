@@ -2,14 +2,12 @@
 include_once '../includes.php';
 
 try {
-    list($action, $data) = api_get_data();
-
-    if (!$action)
-        exit_no_action();
+    list($action, $data) = api_get_params();
 
     switch ($action) {
         case 'select':
             select($data);
+            break;
         case 'create':
             create($data);
             break;
@@ -30,7 +28,7 @@ try {
 
 function select($data)
 {
-    api_require_permission('user');
+    api_require_permission();
     api_require_data($data, 'id');
 
     api_select($data['id'], ['EmployerService', 'select_all'], ['EmployerService', 'select_by_id']);
@@ -49,31 +47,35 @@ function create($data)
     }
 }
 
+/**
+ * @param $data
+ * @throws Exception
+ */
 function find($data)
 {
-    api_require_permission('user');
+    api_require_permission();
     api_require_data($data, 'name');
 
-    try {
-        $employers = EmployerService::find_by_name($data['name']);
+    $employers = EmployerService::find_by_name($data['name']);
 
+    if ($employers) {
         foreach ($employers as &$e)
             $e = $e->to_json_array();
 
-        exit_response(true, 'Performed employer search', $employers);
-    } catch (Exception $e) {
-        exit_server_error($e);
+        exit_response(true, 'Employers found', $employers);
+    } else {
+        exit_response(true, 'No employers found');
     }
 }
 
+/**
+ * @param $data
+ * @throws Exception
+ */
 function update($data)
 {
     api_require_permission('modify_employer');
     api_require_data($data, 'id');
 
-    try {
-        EmployerService::update($data['id'], $data);
-    } catch (Exception $e) {
-        exit_server_error($e);
-    }
+    EmployerService::update($data['id'], $data);
 }

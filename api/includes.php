@@ -19,7 +19,6 @@ function exit_response($success, $message = '', $data = null)
 }
 
 
-
 function exit_no_permission()
 {
     exit_response(false, 'Permission denied');
@@ -55,9 +54,11 @@ function exit_server_error($exception = null)
 /**
  * @param string $permission
  */
-function api_require_permission($permission)
+function api_require_permission($permission = null)
 {
-    if (!AuthService::has_permission($permission))
+    if ($permission == null && !AuthService::get_active_user())
+        exit_no_permission();
+    elseif (!AuthService::has_permission($permission))
         exit_no_permission();
 }
 
@@ -68,7 +69,14 @@ function api_require_data(&$data, ...$fields)
 
     if ($fields) {
         foreach ($fields as $f) {
-            if (!isset($fields[$f])) {
+            if (is_array($f)) {
+                if (!isset($data[$f[0]]))
+                    exit_missing_data();
+                elseif (gettype($data[$f[0]]) != $f[1])
+                    exit_response(false, sprintf('Incorrect data type "%s"', $f[0]));
+            }
+
+            if (!isset($data[$f])) {
                 exit_missing_data($f);
             }
         }
@@ -78,10 +86,13 @@ function api_require_data(&$data, ...$fields)
 /**
  * @return array
  */
-function api_get_data()
+function api_get_params()
 {
     $action = isset($_POST['action']) ? $_POST['action'] : false;
     $data = isset($_POST['data']) ? $_POST['data'] : false;
+
+    if (!$action)
+        exit_no_action();
 
     return [$action, $data];
 }

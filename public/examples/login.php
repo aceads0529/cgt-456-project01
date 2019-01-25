@@ -1,10 +1,11 @@
 <?php
 require_once '../includes.php';
 safe_session_start();
+
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 <head>
     <title>Index</title>
 
@@ -18,8 +19,10 @@ safe_session_start();
 <h1>Login page</h1>
 
 <?php if ($user = AuthService::get_active_user()): ?>
+
     <h2>Hello, <?php echo $user->get_first_name(); ?>!</h2>
-    <h3><?php echo $user->get_user_group()->get_name(); ?></h3>
+    <h3><?php echo $user->get_user_group()->get_label(); ?></h3>
+
 <?php endif; ?>
 
 <form id="login-form">
@@ -58,6 +61,38 @@ safe_session_start();
                     alert(response.message);
                 }
             });
+        });
+
+        const form = {
+            employer: {
+                name: "Company ABC",
+                address: "105 Churchman Bypass",
+                cgt_field_ids: [1],
+            },
+            session: {
+                jobTitle: "Research Assistant",
+                startDate: "2018-12-20",
+                endDate: "2019-05-29",
+                offsite: false,
+                totalHours: 340,
+                payRate: 17.60
+            },
+            supervisor: {
+                email: "supervisor@email.com"
+            },
+            prompts: {
+                rating: 4,
+                relevantWork: "",
+                difficulties: "",
+                relatedToMajor: "",
+                wantedToLearn: "",
+                cgtChangedMind: "",
+                providedContacts: ""
+            }
+        };
+
+        api.call('form/student', form, function (response) {
+            console.log(response);
         });
 
         // Logout button

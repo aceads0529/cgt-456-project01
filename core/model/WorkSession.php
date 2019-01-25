@@ -1,19 +1,33 @@
 <?php
 
-class WorkSession implements IEntity
+class WorkSession implements Entity
 {
-    private $id, $student_id, $employer_id, $job_title, $address, $start_date, $end_date, $offsite, $total_hours, $pay_rate;
+    private $id, $student_id, $supervisor_id, $employer_id, $job_title, $address, $start_date, $end_date, $offsite, $total_hours, $pay_rate;
 
-    public function __construct($id, $student_id, $employer_id, $job_title, $address, $start_date, $end_date, $offsite, $total_hours, $pay_rate)
+    /**
+     * @param int $id
+     * @param int $student_id
+     * @param int $supervisor_id
+     * @param int $employer_id
+     * @param string $job_title
+     * @param string $address
+     * @param DateTime $start_date
+     * @param DateTime $end_date
+     * @param bool $offsite
+     * @param int $total_hours
+     * @param float $pay_rate
+     */
+    public function __construct($id, $student_id, $supervisor_id, $employer_id, $job_title, $address, $start_date, $end_date, $offsite, $total_hours, $pay_rate)
     {
         $this->id = $id;
         $this->student_id = $student_id;
+        $this->supervisor_id = $supervisor_id;
         $this->employer_id = $employer_id;
         $this->job_title = $job_title;
         $this->address = $address;
         $this->start_date = $start_date;
         $this->end_date = $end_date;
-        $this->offsite = $offsite;
+        $this->offsite = (bool)$offsite;
         $this->total_hours = $total_hours;
         $this->pay_rate = $pay_rate;
     }
@@ -26,6 +40,7 @@ class WorkSession implements IEntity
         return [
             'id' => $this->get_id(),
             'studentId' => $this->get_student_id(),
+            'supervisorId' => $this->get_supervisor_id(),
             'employerId' => $this->get_employer_id(),
             'jobTitle' => $this->get_job_title(),
             'address' => $this->get_address(),
@@ -46,6 +61,7 @@ class WorkSession implements IEntity
         return new WorkSession(
             $row['id'],
             $row['student_id'],
+            $row['supervisor_id'],
             $row['employer_id'],
             $row['job_title'],
             $row['address'],
@@ -70,6 +86,14 @@ class WorkSession implements IEntity
     public function get_student_id()
     {
         return $this->student_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function get_supervisor_id()
+    {
+        return $this->supervisor_id;
     }
 
     /**
