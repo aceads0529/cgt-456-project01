@@ -1,0 +1,23 @@
+/* Styles for studentForm.php */
+
+$font-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-title: "Champion Welterweight", "Archivo Black", "Arial Black", "Arial Bold", sans-serif;
+$c-purdueGold: #98700d;
+$c-purdueGoldBright: #c28e0e;
+$c-purdueMoonGray: #baa892;
+$c-purdueCoalGray: #4d4038;
+$c-purdueEverBlue: #5b6870;
+$c-purdueSlayterBlue: #6e99b4;
+
+input {
+	border: none;
+	border-bottom: 4px solid #6399b4;
+}
+
+select {
+	border: none;
+}
+
+fieldset {
+	border: none;
+}

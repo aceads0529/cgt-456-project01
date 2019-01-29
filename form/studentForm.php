@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
     	<meta http-equiv="Content-Type" content="text/html; UTF-8" />
-    	<link rel="stylesheet" type="text/css" href="../general.css" />
-    	<link rel="stylesheet" type="text/css" href="../studentForm.css" />
+    	<link rel="stylesheet" type="text/css" href="../css/general.css" />
+    	<link rel="stylesheet" type="text/css" href="../css/studentForm.css" />
 <!-- Student section of the form -->
 		<title>Student Form</title> 
 	</head>
@@ -26,22 +26,13 @@
 			<p>Start Date: <input type="date" name="startDate"></p>
 			<p>End Date: <input type="date" name="endDate"></p>
 			<p>Total hours worked @ internships over 4 summers</p>
-				<table>
-				<tr>
-					<th>Summer 1</th>
-					<th>Summer 2</th>
-					<th>Summer 3</th>
-					<th>Summer 4</th>
-					<th>Total</th>
-				</tr>
-				<tr>
-					<td><input type="number" name="oneHours"></td>
-					<td><input type="number" name="twoHours"></td>
-					<td><input type="number" name="threeHours"></td>
-					<td><input type="number" name="fourHours"></td>
-					<td><input type="number" name="totalHours"></td>
-				</tr>
-				</table>
+
+			<p>Summer 1: <input type="number" name="oneHours"></p>
+			<p>Summer 2: <input type="number" name="twoHours"></p>
+			<p>Summer 3: <input type="number" name="threeHours"></p>
+			<p>Summer 4: <input type="number" name="fourHours"></p>
+			<p>Total: <input type="number" name="totalHours"></p>
+
 			</fieldset>
 			<fieldset>
 			<h3>Student Info</h3>
@@ -78,7 +69,7 @@
 			<p>Is there anything you wanted to learn during internship that you were not able to? <input type="text" name="wantedToLearn"></p>
 			<p>Has this work experience changed your mind about which sector of CGT you might be most interested in pursuing? <input type="text" name="cgtChangedMind"></p>
 			<p>Internship provided me with contacts which may lead to future employment- <input type="text" name="providedContacts"></p>	
-			<p>Considering your overall experience—how would you rate this internship? </p>
+			<p>Considering your overall experience, how would you rate this internship? </p>
 				<p><input type="radio" name="rating">Very Dissatisfied
 				<input type="radio" name="rating">Dissatisfied
 				<input type="radio" name="rating">Neutral

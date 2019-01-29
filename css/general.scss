@@ -1,34 +1,55 @@
 /* General CSS styles for entire site */
+
 @font-face {
   font-family: 'Champion Welterweight';
   src: url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff") format("woff");
   font-weight: 400;
-  font-style: normal; }
+  font-style: normal;
+}
+
 @font-face {
   font-family: 'Champion-HTF-Welterweight';
   src: url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff") format("woff");
   font-weight: 400;
-  font-style: normal; }
+  font-style: normal;
+}
+
 @font-face {
   font-family: 'Champion Heavyweight';
   src: url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff") format("woff");
   font-weight: 400;
-  font-style: normal; }
+  font-style: normal;
+}
+
 @font-face {
   font-family: 'Champion-HTF-Heavyweight';
   src: url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff") format("woff");
   font-weight: 400;
-  font-style: normal; }
+  font-style: normal;
+}
+
 @font-face {
   font-family: 'Champion Lightweight';
   src: url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff") format("woff");
   font-weight: 400;
-  font-style: normal; }
+  font-style: normal;
+}
+
 @font-face {
   font-family: 'Champion-HTF-Lightweight';
   src: url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff") format("woff");
   font-weight: 400;
-  font-style: normal; }
+  font-style: normal;
+}
+
+$font-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-title: "Champion Welterweight", "Archivo Black", "Arial Black", "Arial Bold", sans-serif;
+$c-gold: #98700d;
+$c-goldBright: #c28e0e;
+$c-moonGray: #baa892;
+$c-coalGray: #4d4038;
+
+
 /*
 	Source: https://css-tricks.com/snippets/sass/power-function/
 	Author: Hugo Giraudel (https://css-tricks.com/author/hugogiraudel/)
@@ -42,18 +63,21 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   vertical-align: baseline;
 }
 */
+
 input:focus,
 select:focus,
 textarea:focus,
 button:focus {
-  outline: none; }
+    outline: none;
+}
 
 html {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: black; }
+	font-family: $font-main;
+	color: black;
+}
 
 h1 {
-  font-family: "Champion Welterweight", "Archivo Black", "Arial Black", "Arial Bold", sans-serif;
-  color: #98700d; }
+	font-family: $font-title;
+	color: $c-gold;
 
-/*# sourceMappingURL=general.css.map */
+}

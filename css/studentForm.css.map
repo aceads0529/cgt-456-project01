@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,gCAAgC;AAWhC,KAAM;EACL,MAAM,EAAE,IAAI;EACZ,aAAa,EAAE,iBAAiB;;AAGjC,MAAO;EACN,MAAM,EAAE,IAAI;;AAGb,QAAS;EACR,MAAM,EAAE,IAAI",
+"sources": ["studentForm.scss"],
+"names": [],
+"file": "studentForm.css"
+}
