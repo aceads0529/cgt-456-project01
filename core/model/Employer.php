@@ -1,6 +1,6 @@
 <?php
 
-class Employer implements IEntity
+class Employer implements Entity
 {
     private $id, $name, $address, $search_str, $cgt_fields;
 
@@ -61,7 +61,7 @@ class Employer implements IEntity
     }
 
     /**
-     * @return CGTField[]
+     * @return Option[]
      */
     public function get_cgt_fields()
     {

@@ -90,7 +90,7 @@ class DataService
      * @param string $table
      * @param array $params
      * @param string[] $columns
-     * @return mysqli_result
+     * @return bool|mysqli_result
      * @throws Exception
      */
     public static function select($table, $params = null, $columns = null)
@@ -101,29 +101,89 @@ class DataService
         $columns = $columns ? self::comma($columns) : '*';
 
         $query_str = sprintf('SELECT %s FROM %s %s', $columns, $table, $clause);
-        return self::query($query_str, $values);
+        $result = self::query($query_str, $values);
+
+        if (!$result || $result->num_rows == 0)
+            return false;
+        else
+            return $result;
+    }
+
+    /**
+     * @param string $table
+     * @param string $table_assoc
+     * @param string $key
+     * @param string $foreign_key
+     * @param array $params
+     * @param string[] $columns
+     * @return bool|mysqli_result
+     * @throws Exception
+     */
+    public static function select_assoc($table, $table_assoc, $key, $foreign_key, $params = null, $columns = null)
+    {
+        $table_alias = 'A.';
+        $assoc_alias = 'B.';
+
+        $table = self::enclose($table, '``') . ' ' . $table_alias[0];
+        $table_assoc = self::enclose($table_assoc, '``') . ' ' . $assoc_alias[0];
+
+        $key = $assoc_alias . self::enclose($key, '``');
+        $foreign_key = $table_alias . self::enclose($foreign_key, '``');
+
+        list($clause, $values) = self::get_select_params_clause($params);
+        $columns = $table_alias . ($columns ? self::comma($columns) : '*');
+
+        $query_str = sprintf('SELECT %s FROM %s, %s %s AND %s = %s', $columns, $table, $table_assoc, $clause, $key, $foreign_key);
+        $result = self::query($query_str, $values);
+
+        if (!$result || $result->num_rows == 0)
+            return false;
+        else
+            return $result;
     }
 
     /**
      * @param string $table
      * @param array $params
+     * @return bool
+     * @throws Exception
+     */
+    public static function exists($table, $params = null)
+    {
+        return (bool)self::select($table, $params);
+    }
+
+    /**
+     * @param string $table
+     * @param array $params
+     * @param bool $ignore_err
      * @return mixed
      * @throws Exception
      */
-    public static function insert($table, $params)
+    public static function insert($table, $params, $ignore_err = false)
     {
         $table = self::enclose($table, '``');
         list($clause, $values) = self::get_insert_params_clause($params);
 
-        $query_str = sprintf('INSERT INTO %s %s', $table, $clause);
+        if ($ignore_err)
+            $query_str = sprintf('INSERT INTO %s %s', $table, $clause);
+        else
+            $query_str = sprintf('INSERT IGNORE INTO %s %s', $table, $clause);
 
         $db = self::connect();
         self::query_db($db, $query_str, $values);
 
         $id = mysqli_insert_id($db);
+        $num_rows = self::query_db($db, 'SELECT ROW_COUNT() AS rows', null)->fetch_assoc()['rows'];
 
         $db->close();
-        return $id;
+
+        if ($num_rows < 1)
+            return false;
+        else if ($id !== 0)
+            return $id;
+        else
+            return true;
     }
 
     /**
@@ -203,10 +263,13 @@ class DataService
 
             $values = [];
 
-            while ($item = current($params)) {
-                $columns[] = self::enclose(key($params), '``');
-                $values[] = $item;
-                $question_marks[] = '?';
+            while (($item = current($params)) !== false) {
+                if ($item != null) {
+                    $columns[] = self::enclose(key($params), '``');
+                    $values[] = $item;
+                    $question_marks[] = '?';
+                }
+
                 next($params);
             }
 

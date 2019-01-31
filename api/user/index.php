@@ -2,10 +2,7 @@
 include_once '../includes.php';
 
 try {
-    list($action, $data) = api_get_data();
-
-    if (!$action)
-        exit_no_action();
+    list($action, $data) = api_get_params();
 
     switch ($action) {
         case 'login':
@@ -31,18 +28,18 @@ try {
     exit_server_error($e);
 }
 
+/**
+ * @param $data
+ * @throws Exception
+ */
 function login($data)
 {
     api_require_data($data, 'login', 'password');
 
-    try {
-        if ($user = AuthService::login($data['login'], $data['password']))
-            exit_response(true, 'Login successful', [$user]);
-        else
-            exit_response(false, 'Username and password do not match');
-    } catch (Exception $e) {
-        exit_server_error($e);
-    }
+    if ($user = AuthService::login($data['login'], $data['password']))
+        exit_response(true, 'Login successful', $user->to_json_array());
+    else
+        exit_response(false, 'Username and password do not match');
 }
 
 function logout()
@@ -53,7 +50,7 @@ function logout()
 
 function active()
 {
-    api_require_permission('user');
+    api_require_permission();
 
     if ($user = AuthService::get_active_user()->to_json_array())
         exit_response(true, 'Active user found', $user);
@@ -63,12 +60,16 @@ function active()
 
 function select($data)
 {
-    api_require_permission('user');
+    api_require_permission();
     api_require_data($data, 'id');
 
     api_select($data['id'], ['UserService', 'select_all'], ['UserService', 'select_by_id']);
 }
 
+/**
+ * @param $data
+ * @throws Exception
+ */
 function register($data)
 {
     api_require_data(
@@ -86,22 +87,29 @@ function register($data)
     if (!_validate_user_request($data)) {
         exit_response(false, 'Invalid user data');
     } else {
-        try {
-            AuthService::register_new_user(
-                $data['login'],
-                $data['passwd'],
-                $data['permissions'],
-                $data['firstName'],
-                $data['lastName'],
-                $data['email'],
-                $data['phone']);
-            exit_response(true);
-        } catch (Exception $e) {
-            exit_server_error($e);
-        }
+        if ($data['userGroup'] == 'student')
+            api_require_data($data, 'advisorId');
+        else
+            $data['advisorId'] = null;
+
+        AuthService::register(
+            $data['login'],
+            $data['passwd'],
+            $data['advisorId'],
+            $data['userGroup'],
+            $data['firstName'],
+            $data['lastName'],
+            $data['email'],
+            $data['phone']);
+
+        exit_response(true, 'User successfully created');
     }
 }
 
+/**
+ * @param $data
+ * @throws Exception
+ */
 function create($data)
 {
     api_require_permission('modify_user');
@@ -120,18 +128,22 @@ function create($data)
     if (!_validate_user_request($data)) {
         exit_response(false, 'Invalid user data');
     } else {
-        try {
-            UserService::create(
-                $data['login'],
-                $data['passwd'],
-                $data['permissions'],
-                $data['firstName'],
-                $data['lastName'],
-                $data['email'],
-                $data['phone']);
-        } catch (Exception $e) {
-            exit_server_error($e);
-        }
+        if ($data['userGroup'] == 'student')
+            api_require_data($data, 'advisorId');
+        else
+            $data['advisorId'] = null;
+
+        UserService::create(
+            $data['login'],
+            $data['passwd'],
+            $data['advisorId'],
+            $data['userGroup'],
+            $data['firstName'],
+            $data['lastName'],
+            $data['email'],
+            $data['phone']);
+
+        exit_response(true, 'User successfully created');
     }
 }
 

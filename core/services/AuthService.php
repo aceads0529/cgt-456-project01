@@ -18,6 +18,9 @@ class AuthService
         if ($user) {
             $hash = md5($passwd . $user->get_password_salt());
             if ($hash == $user->get_password_hash()) {
+                safe_session_start();
+                session_destroy();
+
                 self::set_active_user($user);
                 return $user;
             }
@@ -29,7 +32,7 @@ class AuthService
     public static function logout()
     {
         safe_session_start();
-        unset($_SESSION['active_user']);
+        session_destroy();
     }
 
     /**
@@ -59,10 +62,7 @@ class AuthService
         $user = self::get_active_user();
 
         if ($user) {
-            if ($permission == 'user')
-                return true;
-            else
-                return $user->get_user_group()->has_permission($permission);
+            return $user->get_user_group()->has_permission($permission);
         } else {
             return false;
         }
@@ -72,6 +72,7 @@ class AuthService
      * @param string $login
      * @param string $passwd
      * @param int $user_group_id
+     * @param int $advisor_id
      * @param string $first_name
      * @param string $last_name
      * @param string $email
@@ -79,17 +80,27 @@ class AuthService
      * @return User
      * @throws Exception
      */
-    public static function register_new_user($login, $passwd, $user_group_id, $first_name, $last_name, $email, $phone)
+    public static function register($login, $passwd, $user_group_id, $advisor_id, $first_name, $last_name, $email, $phone)
     {
-        $p = UserGroupService::select_by_id($user_group_id);
+        /** @var UserGroup $user_group */
+        $user_group = UserGroupService::select_by_id($user_group_id);
 
-        if (!$p)
+        if (!$user_group)
             throw new InvalidArgumentException('Permissions not found');
-        elseif (!$p->get_can_register())
+        elseif (!$user_group->get_can_register())
             throw new InvalidArgumentException('Invalid account type');
+        elseif ($user_group_id == 'supervisor' && !InviteService::is_invited())
+            throw new InvalidArgumentException('Invitation required to register as supervisor');
         else {
-            $user = UserService::create($login, $passwd, $user_group_id, $first_name, $last_name, $email, $phone);
+            $user = UserService::create($login, $passwd, $advisor_id, $user_group, $first_name, $last_name, $email, $phone);
             self::set_active_user($user);
+
+            // If a supervisor is registering, attach him to the work session he was invited to
+            if ($work_session_id = InviteService::get_work_session_id()) {
+                WorkSessionService::update_supervisor($work_session_id, $user->get_id());
+            }
+
+            return $user;
         }
     }
 }
