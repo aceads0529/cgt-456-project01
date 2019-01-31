@@ -13,7 +13,7 @@
 		<h1>Internship Report Form</h1>
 		<form action="studentFormDo.php" method="post"> <!-- update action when connecting files -->
 			<fieldset>
-			<h2>Name of Student: <input type="text" name="firstName" placeholder="First Name"><input type="text" name="lastName" placeholder="Last Name"></h2>
+			<h2>Name of Student: <input type="text" name="firstName"><input type="text" name="lastName"></h2>
 			<p>Campus: <select name="campus">
 				<option value="westLafayette">West Lafayette</option>
 				<option value="fortWayne">Fort Wayne</option>
@@ -21,8 +21,9 @@
 				<option value="northwest">Northwest</option>
 				<option value="other">Other</option>
 			</select></p>
+			<!-- can't we generate today's date? -->
 			<p>Today's Date: <input type="date" name="todayDate"></p>	
-			<h3>Work Period of Internship -</h3>
+			<h3>Work Period of Internship</h3>
 			<p>Start Date: <input type="date" name="startDate"></p>
 			<p>End Date: <input type="date" name="endDate"></p>
 			<p>Total hours worked @ internships over 4 summers</p>
@@ -31,6 +32,7 @@
 			<p>Summer 2: <input type="number" name="twoHours"></p>
 			<p>Summer 3: <input type="number" name="threeHours"></p>
 			<p>Summer 4: <input type="number" name="fourHours"></p>
+			<!-- can we calculate this for them w/ JS? -->
 			<p>Total: <input type="number" name="totalHours"></p>
 
 			</fieldset>
@@ -58,17 +60,23 @@
 				<option value="site">On Site</option>
 			</select></p>
 			<p>List 5 activities that you regularly performed during the internship. Give examples of activities.</p>
-			<p><input type="text" name="activities"></p>
-			<p><input type="text" name="activities"></p>
-			<p><input type="text" name="activities"></p>
-			<p><input type="text" name="activities"></p>
-			<p><input type="text" name="activities"></p>
-			<p>Did the supervisor give you relevant work to accomplish - specify! <input type="text" name="relevantWork"></p>
-			<p>Difficulties or problem areas encountered during internship. <input type="text" name="difficulties"></p>
-			<p>Explain how work experience related to your major. <input type="text" name="relatedToMajor"></p>
-			<p>Is there anything you wanted to learn during internship that you were not able to? <input type="text" name="wantedToLearn"></p>
-			<p>Has this work experience changed your mind about which sector of CGT you might be most interested in pursuing? <input type="text" name="cgtChangedMind"></p>
-			<p>Internship provided me with contacts which may lead to future employment- <input type="text" name="providedContacts"></p>	
+			<p><input type="text" name="activities" class="long"></p>
+			<p><input type="text" name="activities" class="long"></p>
+			<p><input type="text" name="activities" class="long"></p>
+			<p><input type="text" name="activities" class="long"></p>
+			<p><input type="text" name="activities" class="long"></p>
+			<p>Did the supervisor give you relevant work to accomplish? Specify!</p>
+			<p><input type="text" name="relevantWork" class="long"></p>
+			<p>Difficulties or problem areas encountered during internship. </p>
+			<p><input type="text" name="difficulties" class="long"></p>
+			<p>Explain how work experience related to your major. </p>
+			<p><input type="text" name="relatedToMajor" class="long"></p>
+			<p>Is there anything you wanted to learn during internship that you were not able to? </p>
+			<p><input type="text" name="wantedToLearn" class="long"></p>
+			<p>Has this work experience changed your mind about which sector of CGT you might be most interested in pursuing? </p>
+			<p><input type="text" name="cgtChangedMind" class="long"></p>
+			<p>Internship provided me with contacts which may lead to future employment- </p>
+			<p><input type="text" name="providedContacts"></p>	
 			<p>Considering your overall experience, how would you rate this internship? </p>
 				<p><input type="radio" name="rating">Very Dissatisfied
 				<input type="radio" name="rating">Dissatisfied
@@ -81,15 +89,16 @@
 			<p>Name of Company <input type="text" name="companyName"></p>
 			<p>Address of Home/Main Office <input type="text" name="companyAddress"></p>
 			<p>Type/Sector of CGT Industry - select all that apply </p>
-				<p><input type="checkbox" name="cgt_fields" value="animation">Animation
-				<input type="checkbox" name="cgt_fields" value="construction">Construction
-				<input type="checkbox" name="cgt_fields" value="dataViz">Data Viz
-				<input type="checkbox" name="cgt_fields" value="game">Game
-				<input type="checkbox" name="cgt_fields" value="ux">UX
-				<input type="checkbox" name="cgt_fields" value="vpi">VPI
-				<input type="checkbox" name="cgt_fields" value="visefx">Vis EFX
+				<p><input type="checkbox" name="cgt_fields" value="animation">Animation<br>
+				<input type="checkbox" name="cgt_fields" value="construction">Construction<br>
+				<input type="checkbox" name="cgt_fields" value="dataViz">Data Viz<br>
+				<input type="checkbox" name="cgt_fields" value="game">Game<br>
+				<input type="checkbox" name="cgt_fields" value="ux">UX<br>
+				<input type="checkbox" name="cgt_fields" value="vpi">VPI<br>
+				<input type="checkbox" name="cgt_fields" value="visefx">Vis EFX<br>
 				<input type="checkbox" name="cgt_fields" value="web">Web</p>
-			<p>Location of office or job site where you worked if it is different than the main office <input type="text" name="addressIfDifferent"></p>
+			<p>Location of office or job site where you worked, if different than the main office:</p>
+			<p> <input type="text" name="addressIfDifferent" class="long"></p>
 			</fieldset>
 			<fieldset>	
 			<p>Name of Supervisor - direct <input type="text" name="supervisorName"></p>
@@ -112,143 +121,143 @@
 				</tr>
 				<tr>
 					<td>Performs in a dependable manner</td>
-					<td><input type="radio" name="dependable"></td>
-					<td><input type="radio" name="dependable"></td>
-					<td><input type="radio" name="dependable"></td>
-					<td><input type="radio" name="dependable"></td>
+					<td><input type="radio" name="dependable"><span class="customradio"></span></td>
+					<td><input type="radio" name="dependable"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="dependable"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="dependable"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Cooperates with co-workers and supervisors</td>
-					<td><input type="radio" name="cooperative"></td>
-					<td><input type="radio" name="cooperative"></td>
-					<td><input type="radio" name="cooperative"></td>
-					<td><input type="radio" name="cooperative"></td>
+					<td><input type="radio" name="cooperative"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="cooperative"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="cooperative"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="cooperative"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Shows interest in work</td>
-					<td><input type="radio" name="interested"></td>
-					<td><input type="radio" name="interested"></td>
-					<td><input type="radio" name="interested"></td>
-					<td><input type="radio" name="interested"></td>
+					<td><input type="radio" name="interested"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="interested"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="interested"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="interested"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Learns quickly</td>
-					<td><input type="radio" name="fastLearner"></td>
-					<td><input type="radio" name="fastLearner"></td>
-					<td><input type="radio" name="fastLearner"></td>
-					<td><input type="radio" name="fastLearner"></td>
+					<td><input type="radio" name="fastLearner"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="fastLearner"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="fastLearner"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="fastLearner"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Shows initiative</td>
-					<td><input type="radio" name="initiative"></td>
-					<td><input type="radio" name="initiative"></td>
-					<td><input type="radio" name="initiative"></td>
-					<td><input type="radio" name="initiative"></td>
+					<td><input type="radio" name="initiative"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="initiative"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="initiative"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="initiative"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Produces high quality work</td>
-					<td><input type="radio" name="workQuality"></td>
-					<td><input type="radio" name="workQuality"></td>
-					<td><input type="radio" name="workQuality"></td>
-					<td><input type="radio" name="workQuality"></td>
+					<td><input type="radio" name="workQuality"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="workQuality"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="workQuality"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="workQuality"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Accepts responsibility</td>
-					<td><input type="radio" name="responsibility"></td>
-					<td><input type="radio" name="responsibility"></td>
-					<td><input type="radio" name="responsibility"></td>
-					<td><input type="radio" name="responsibility"></td>
+					<td><input type="radio" name="responsibility"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="responsibility"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="responsibility"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="responsibility"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Accepts criticism</td>
-					<td><input type="radio" name="acceptCriticism"></td>
-					<td><input type="radio" name="acceptCriticism"></td>
-					<td><input type="radio" name="acceptCriticism"></td>
-					<td><input type="radio" name="acceptCriticism"></td>
+					<td><input type="radio" name="acceptCriticism"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="acceptCriticism"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="acceptCriticism"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="acceptCriticism"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Demonstrates organizational skills</td>
-					<td><input type="radio" name="organization"></td>
-					<td><input type="radio" name="organization"></td>
-					<td><input type="radio" name="organization"></td>
-					<td><input type="radio" name="organization"></td>
+					<td><input type="radio" name="organization"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="organization"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="organization"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="organization"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Demonstrates technical knowledge and expertise</td>
-					<td><input type="radio" name="techKnowledge"></td>
-					<td><input type="radio" name="techKnowledge"></td>
-					<td><input type="radio" name="techKnowledge"></td>
-					<td><input type="radio" name="techKnowledge"></td>
+					<td><input type="radio" name="techKnowledge"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="techKnowledge"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="techKnowledge"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="techKnowledge"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Shows good judgment</td>
-					<td><input type="radio" name="judgment"></td>
-					<td><input type="radio" name="judgment"></td>
-					<td><input type="radio" name="judgment"></td>
-					<td><input type="radio" name="judgment"></td>
+					<td><input type="radio" name="judgment"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="judgment"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="judgment"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="judgment"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Demonstrates creativity/originality</td>
-					<td><input type="radio" name="creativity"></td>
-					<td><input type="radio" name="creativity"></td>
-					<td><input type="radio" name="creativity"></td>
-					<td><input type="radio" name="creativity"></td>
+					<td><input type="radio" name="creativity"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="creativity"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="creativity"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="creativity"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Analyzes problems effectively</td>
-					<td><input type="radio" name="problemAnalysis"></td>
-					<td><input type="radio" name="problemAnalysis"></td>
-					<td><input type="radio" name="problemAnalysis"></td>
-					<td><input type="radio" name="problemAnalysis"></td>
+					<td><input type="radio" name="problemAnalysis"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="problemAnalysis"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="problemAnalysis"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="problemAnalysis"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Is self-reliant</td>
-					<td><input type="radio" name="selfReliance"></td>
-					<td><input type="radio" name="selfReliance"></td>
-					<td><input type="radio" name="selfReliance"></td>
-					<td><input type="radio" name="selfReliance"></td>
+					<td><input type="radio" name="selfReliance"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="selfReliance"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="selfReliance"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="selfReliance"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Communicates well</td>
-					<td><input type="radio" name="communication"></td>
-					<td><input type="radio" name="communication"></td>
-					<td><input type="radio" name="communication"></td>
-					<td><input type="radio" name="communication"></td>
+					<td><input type="radio" name="communication"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="communication"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="communication"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="communication"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Writes effectively</td>
-					<td><input type="radio" name="writing"></td>
-					<td><input type="radio" name="writing"></td>
-					<td><input type="radio" name="writing"></td>
-					<td><input type="radio" name="writing"></td>
+					<td><input type="radio" name="writing"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="writing"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="writing"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="writing"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Has a professional attitude</td>
-					<td><input type="radio" name="profAttitude"></td>
-					<td><input type="radio" name="profAttitude"></td>
-					<td><input type="radio" name="profAttitude"></td>
-					<td><input type="radio" name="profAttitude"></td>
+					<td><input type="radio" name="profAttitude"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="profAttitude"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="profAttitude"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="profAttitude"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Gives a professional appearance</td>
-					<td><input type="radio" name="profAppearance"></td>
-					<td><input type="radio" name="profAppearance"></td>
-					<td><input type="radio" name="profAppearance"></td>
-					<td><input type="radio" name="profAppearance"></td>
+					<td><input type="radio" name="profAppearance"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="profAppearance"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="profAppearance"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="profAppearance"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Is punctual</td>
-					<td><input type="radio" name="punctuality"></td>
-					<td><input type="radio" name="punctuality"></td>
-					<td><input type="radio" name="punctuality"></td>
-					<td><input type="radio" name="punctuality"></td>
+					<td><input type="radio" name="punctuality"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="punctuality"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="punctuality"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="punctuality"><span class="customradio"></span></td></td>
 				</tr>
 				<tr>
 					<td>Uses time effectively</td>
-					<td><input type="radio" name="timeEffective"></td>
-					<td><input type="radio" name="timeEffective"></td>
-					<td><input type="radio" name="timeEffective"></td>
-					<td><input type="radio" name="timeEffective"></td>
+					<td><input type="radio" name="timeEffective"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="timeEffective"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="timeEffective"><span class="customradio"></span></td></td>
+					<td><input type="radio" name="timeEffective"><span class="customradio"></span></td></td>
 				</tr>
 			</table><br>
 			</fieldset>

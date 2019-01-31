@@ -1,9 +1,20 @@
 /* CSS for Index Page */
+/* reminders:
+	ch is width of 0 in font
+	em is height of font
+
+*/
 body {
-  background: repeating-linear-gradient(45deg, #4d4038, #4d4038 16px, #baa892 16px, #baa892 17px); }
+  background: repeating-linear-gradient(45deg, black, black 16px, #baa892 16px, #baa892 17px);
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2.5ch; }
 
 section#content {
-  max-width: 950px;
+  min-width: 50ch;
+  max-width: 100ch;
   background: white;
   padding: 1em; }
 
@@ -14,7 +25,8 @@ section#content {
 #titleRibbon {
   background: transparent;
   height: 0px;
-  width: 600px;
+  width: 25ch;
+  max-width: 75ch;
   border-top: 1.5em solid white;
   border-bottom: 1.5em solid white;
   border-left: 1.5em solid transparent;
