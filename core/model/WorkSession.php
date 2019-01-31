@@ -2,7 +2,16 @@
 
 class WorkSession implements Entity
 {
-    private $id, $student_id, $supervisor_id, $employer_id, $job_title, $address, $start_date, $end_date, $offsite, $total_hours, $pay_rate;
+    private
+        $id, $student_id, $supervisor_id, $employer_id,
+        $job_title,
+        $address,
+        $start_date,
+        $end_date,
+        $offsite,
+        $total_hours,
+        $pay_rate,
+        $financial_assts;
 
     /**
      * @param int $id
@@ -16,8 +25,18 @@ class WorkSession implements Entity
      * @param bool $offsite
      * @param int $total_hours
      * @param float $pay_rate
+     * @param Option[] $financial_assts
      */
-    public function __construct($id, $student_id, $supervisor_id, $employer_id, $job_title, $address, $start_date, $end_date, $offsite, $total_hours, $pay_rate)
+    public function __construct(
+        $id, $student_id, $supervisor_id, $employer_id,
+        $job_title,
+        $address,
+        $start_date,
+        $end_date,
+        $offsite,
+        $total_hours,
+        $pay_rate,
+        $financial_assts)
     {
         $this->id = $id;
         $this->student_id = $student_id;
@@ -30,6 +49,7 @@ class WorkSession implements Entity
         $this->offsite = (bool)$offsite;
         $this->total_hours = $total_hours;
         $this->pay_rate = $pay_rate;
+        $this->financial_assts = $financial_assts;
     }
 
     /**
@@ -37,6 +57,11 @@ class WorkSession implements Entity
      */
     function to_json_array()
     {
+        $assts = [];
+        foreach (self::get_financial_assts() as $a) {
+            $assts[] = $a->to_json_array();
+        }
+
         return [
             'id' => $this->get_id(),
             'studentId' => $this->get_student_id(),
@@ -48,28 +73,9 @@ class WorkSession implements Entity
             'endDate' => $this->get_end_date(),
             'offsite' => $this->is_offsite(),
             'totalHours' => $this->get_total_hours(),
-            'payRate' => $this->get_pay_rate()
+            'payRate' => $this->get_pay_rate(),
+            'financialAssts' => $assts
         ];
-    }
-
-    /**
-     * @param array $row
-     * @return WorkSession
-     */
-    static function from_db_row($row)
-    {
-        return new WorkSession(
-            $row['id'],
-            $row['student_id'],
-            $row['supervisor_id'],
-            $row['employer_id'],
-            $row['job_title'],
-            $row['address'],
-            $row['start_date'],
-            $row['end_date'],
-            $row['offsite'],
-            $row['total_hours'],
-            $row['pay_rate']);
     }
 
     /**
@@ -158,5 +164,10 @@ class WorkSession implements Entity
     public function get_pay_rate()
     {
         return $this->pay_rate;
+    }
+
+    public function get_financial_assts()
+    {
+        return $this->financial_assts;
     }
 }

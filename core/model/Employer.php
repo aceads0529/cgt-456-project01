@@ -61,7 +61,7 @@ class Employer implements Entity
     }
 
     /**
-     * @return CGTField[]
+     * @return Option[]
      */
     public function get_cgt_fields()
     {

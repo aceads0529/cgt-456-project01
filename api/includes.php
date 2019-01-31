@@ -3,9 +3,6 @@ include_once __DIR__ . '/../core/includes.php';
 
 define('ENABLE_ERR_RESPONSES', true);
 
-define('NO_PERMISSION', 'Permission denied');
-define('NO_ACTION', 'Missing required "action" from request');
-
 /**
  * @param bool $success
  * @param string $message
@@ -13,6 +10,23 @@ define('NO_ACTION', 'Missing required "action" from request');
  */
 function exit_response($success, $message = '', $data = null)
 {
+    try {
+        $user_id = AuthService::get_active_user();
+        if ($user_id)
+            $user_id = $user_id->get_id();
+        else
+            $user_id = null;
+
+        DataService::insert('api_log', [
+            'request_uri' => $_SERVER['REQUEST_URI'],
+            'action' => $_REQUEST['action'],
+            'user_id' => $user_id,
+            'success' => (int)$success,
+            'message' => $message,
+            'data' => $data ? null : json_encode($data)], true);
+    } catch (Exception $e) {
+    }
+
     header('Content-Type: application/json');
     echo json_encode(['success' => (bool)$success, 'message' => (string)$message, 'data' => $data]);
     exit;
@@ -56,9 +70,10 @@ function exit_server_error($exception = null)
  */
 function api_require_permission($permission = null)
 {
-    if ($permission == null && !AuthService::get_active_user())
-        exit_no_permission();
-    elseif (!AuthService::has_permission($permission))
+    if ($permission == null) {
+        if (!AuthService::get_active_user())
+            exit_no_permission();
+    } elseif (!AuthService::has_permission($permission))
         exit_no_permission();
 }
 

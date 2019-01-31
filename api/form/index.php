@@ -33,7 +33,7 @@ function student($data)
 {
     api_require_permission('submit_student_form');
 
-    api_require_data($data, 'employer', 'session', 'supervisor', 'prompts');
+    api_require_data($data, 'employer', 'session', 'supervisor', 'prompts', 'fi');
     api_require_data($data['supervisor'], 'email');
     api_require_data($data['prompts'],
         'rating',

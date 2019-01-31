@@ -22,7 +22,7 @@ class EmployerService extends EntityService
             $row['name'],
             $row['address'],
             $row['search_str'],
-            CgtFieldService::select_by_employer_id($row['id']));
+            OptionService::select_by_entity('employer', 'cgt_field', ['employer_id' => $row['id']]));
     }
 
     /**
@@ -79,26 +79,24 @@ class EmployerService extends EntityService
     /**
      * @param int $employer_id
      * @param int[] $cgt_field_ids
-     * @return CGTField[]
+     * @return Option[]
      * @throws Exception
      */
     public static function update_employer_cgt_fields($employer_id, $cgt_field_ids)
     {
-        $fields = [];
+        $fields = OptionService::select_by_entity('employer', 'cgt_field', ['employer_id' => $employer_id]);
 
         foreach ($cgt_field_ids as $field_id) {
-            $f = CgtFieldService::select_by_id($field_id);
+            $f = OptionService::select_by_id('cgt_field', $field_id);
 
             if ($f) {
                 $fields[] = $f;
-                $field_exists = DataService::exists('employer_cgt_fields', [
+                $result = DataService::insert('employer_cgt_fields', [
                     'employer_id' => $employer_id, 'cgt_field_id' => $field_id
-                ]);
+                ], true);
 
-                if (!$field_exists) {
-                    DataService::insert('employer_cgt_fields', [
-                        'employer_id' => $employer_id, 'cgt_field_id' => $field_id
-                    ]);
+                if ($result) {
+                    $fields[] = $f;
                 }
             }
         }

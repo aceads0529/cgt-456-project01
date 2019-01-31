@@ -18,6 +18,7 @@ class UserService extends EntityService
      */
     protected static function get_entity_from_row($row)
     {
+        /** @var UserGroup $user_group */
         $user_group = UserGroupService::select_by_id($row['user_group_id']);
 
         return new User(

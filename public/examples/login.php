@@ -91,9 +91,9 @@ safe_session_start();
             }
         };
 
-        api.call('form/student', form, function (response) {
-            console.log(response);
-        });
+        // api.call('form/student', form, function (response) {
+        //     console.log(response);
+        // });
 
         // Logout button
         $('#logout').click(function (e) {

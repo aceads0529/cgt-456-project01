@@ -13,6 +13,7 @@ class WorkSessionService extends EntityService
     /**
      * @param array $row
      * @return WorkSession
+     * @throws Exception
      */
     protected static function get_entity_from_row($row)
     {
@@ -23,6 +24,8 @@ class WorkSessionService extends EntityService
             $start_date = null;
             $end_date = null;
         }
+
+        $assts = FinancialAsstService::select_by_work_session_id($row['id']);
 
         return new WorkSession(
             $row['id'],
@@ -35,7 +38,8 @@ class WorkSessionService extends EntityService
             $end_date,
             $row['offsite'],
             $row['total_hours'],
-            $row['pay_rate']);
+            $row['pay_rate'],
+            $assts);
     }
 
     /**
