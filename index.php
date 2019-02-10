@@ -9,7 +9,7 @@
 		<title>CGT 456 | Project 1</title> 
 	</head>
 	<body>
-		<header>
+	<header>
 
 			<div id="titleHeader">
 
@@ -20,10 +20,8 @@
 			</div>
 
 		</header>
-
+		
 		<section id="content">
-
-
 			<div id="formContainer">
 				<?php include 'form/studentForm.php'; ?>
 			</div>
