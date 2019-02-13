@@ -1,0 +1,65 @@
+/* CSS for Index Page */
+
+/* reminders:
+	ch is width of 0 in font
+	em is height of font
+
+*/;
+
+$c-gold: #98700d;
+$c-goldBright: #c28e0e;
+$c-moonGray: #baa892;
+$c-coalGray: #4d4038;
+$c-evertrueBlue:#5B6870;
+header{
+	background-color:$c-gold;
+	height: 100px;
+	margin:10px;
+}
+header img{
+	width:32%;
+	height:auto;
+	margin:10px;
+}
+body {
+	background: repeating-linear-gradient(
+		45deg,
+		black,
+		black 16px,
+		$c-evertrueBlue 16px,
+		$c-evertrueBlue 17px
+		);
+	width: auto;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 2.5ch;
+}
+
+section#content {
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+	min-width: 50ch;
+	max-width: 100ch;
+	background: white;
+	padding: 1em;
+}
+
+#titleText {
+	line-height: 3rem;
+	padding-left: 3rem;
+}
+
+#titleRibbon {
+	background: transparent;
+	height: 0px;
+	width: 25ch;
+	max-width: 75ch;
+	border-top: 1.5em solid white;
+	border-bottom: 1.5em solid white;
+	border-left: 1.5em solid transparent;
+	border-right: 1.5em solid transparent;
+	position: absolute;
+	z-index: -1;
+}
