@@ -50,12 +50,12 @@ echo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             const password = $('#password').val();
 			const firstname = $('#firstname').val();
             const lastname = $('#lastname').val();
-			const admin = $('#admin').val();
             const email = $('#email').val();
 			const phone = $('#phone').val();
+            const userGroupId = 'student';
 
             // Make API call
-            api.call('user/register', {login: login, password: password, firstname: firstname, lastname: lastname, email: email, phone: phone}, function (response) {
+            api.call('user/register', {login: login, password: password, userGroupId: userGroupId, firstname: firstname, lastname: lastname, email: email, phone: phone}, function (response) {
                 // Determine whether username and password a correct
                 if (response.success) {
                     // If there was no error, reload the page
