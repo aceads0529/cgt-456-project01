@@ -1,0 +1,87 @@
+/* Styles for studentForm.php */
+
+$font-main: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-title: "Champion Welterweight", "Archivo Black", "Arial Black", "Arial Bold", sans-serif;
+$c-purdueGold: #98700d;
+$c-purdueGoldBright: #c28e0e;
+$c-purdueMoonGray: #baa892;
+$c-purdueCoalGray: #4d4038;
+$c-purdueEverBlue: #5b6870;
+$c-purdueSlayterBlue: #6e99b4;
+$c-ameliaBlue: #a3d6d7;
+
+input {
+	border: none;
+	border-bottom: 4px solid $c-purdueSlayterBlue;
+	font-size: 1rem;
+}
+
+input::placeholder {
+	font-family: $font-main;
+	font-style: italic;
+}
+
+input::-webkit-input-placeholder {
+	font-family: $font-main;
+	font-style: italic;
+}
+
+input.long {
+	width: 100%;
+}
+
+input.submit {
+	font-family: $font-title;
+	font-size: 1.5rem;
+	padding: .5rem;
+	background: $c-purdueEverBlue;
+	color: white;
+	border: none;
+}
+
+input.submit:hover {
+	background: $c-purdueGold;
+	cursor: pointer;
+
+}
+/*
+input[type="radio"] {
+	cursor: pointer;
+	position: absolute;
+	opacity: 0;
+	height: 0;
+	width: 0;
+}
+
+.customradio {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	height: 1rem;
+	width: 1rem;
+	background: $c-purdueEverBlue;
+	border-radius: 50%;
+}
+
+.customradio:hover {
+
+
+
+}*/
+
+select {
+	border: none;
+	font-size: 1rem;
+	font-weight: bold;
+	background: $c-ameliaBlue;
+	padding: .25rem;
+	margin-left: .5rem;
+}
+
+fieldset {
+	border: none;
+	border-top: 8px solid $c-purdueGold;
+	padding-top: .5rem;
+	padding-bottom: 1rem;
+}
+

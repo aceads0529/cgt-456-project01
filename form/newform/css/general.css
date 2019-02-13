@@ -1,0 +1,56 @@
+/* Headers, imports, variables */
+@font-face {
+  font-family: 'Champion Welterweight';
+  src: url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: 'Champion-HTF-Welterweight';
+  src: url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: 'Champion Heavyweight';
+  src: url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: 'Champion-HTF-Heavyweight';
+  src: url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: 'Champion Lightweight';
+  src: url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: 'Champion-HTF-Lightweight';
+  src: url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+/*
+	clear formatting
+
+	Source: https://css-tricks.com/snippets/sass/power-function/
+	Author: Hugo Giraudel (https://css-tricks.com/author/hugogiraudel/)
+*/
+html, body, div, span, applet, object, iframe, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+input:focus, select:focus, textarea:focus, button:focus {
+  outline: none; }
+
+/* general styles */
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: black; }
+
+h1 {
+  font-family: "Champion Welterweight", "Archivo Black", "Arial Black", "Arial Bold", sans-serif;
+  color: #98700d; }
+
+/*# sourceMappingURL=general.css.map */

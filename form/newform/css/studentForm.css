@@ -1,0 +1,81 @@
+/* Styles for studentForm.php */
+h2 {
+  text-align: center;
+}
+input {
+  font-size: 1rem; 
+}
+
+input::placeholder {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: italic; }
+
+input::-webkit-input-placeholder {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: italic; }
+
+input.long {
+  width: 100%; }
+
+input.submit {
+  font-family: "Champion Welterweight", "Archivo Black", "Arial Black", "Arial Bold", sans-serif;
+  font-size: 1.5rem;
+  padding: .5rem;
+  background: #5b6870;
+  color: white;
+  border: none; }
+
+input.submit:hover {
+  background: #98700d;
+  cursor: pointer; }
+
+/*
+input[type="radio"] {
+	cursor: pointer;
+	position: absolute;
+	opacity: 0;
+	height: 0;
+	width: 0;
+}
+
+.customradio {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	height: 1rem;
+	width: 1rem;
+	background: $c-purdueEverBlue;
+	border-radius: 50%;
+}
+
+.customradio:hover {
+
+
+
+}*/
+select {
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #a3d6d7;
+  padding: .25rem;
+  margin-left: .5rem; }
+
+fieldset {
+  border: none;
+  border-top: 8px solid #98700d;
+  padding-top: .5rem;
+  padding-bottom: 1rem; }
+
+.banner-holder img {
+  width: 33%;
+  display:block;
+  margin:auto;
+}
+
+.banner-holder {
+  padding-bottom: 30px;
+}
+.row {
+  padding: 10px;
+}
