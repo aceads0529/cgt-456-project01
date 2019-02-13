@@ -1,6 +1,6 @@
 <?php
 
-class Employer implements Entity
+class Employer_depr implements Entity
 {
     private $id, $name, $address, $search_str, $cgt_fields;
 

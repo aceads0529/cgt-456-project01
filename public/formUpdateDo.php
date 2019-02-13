@@ -99,6 +99,6 @@ if(($username == "") || ($firstname == "") || ($lastname == "") || ($account == 
 
 	include("includes/closeDBconn.php");
 
-	header("Location:form.php");
+	header("Location:submit.php");
 
 ?>

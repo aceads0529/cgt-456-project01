@@ -1,0 +1,17 @@
+{
+  "employer": {
+    name, address, cgt_field_ids
+  },
+  "session": {
+    jobTitle, address, startDate, endDate, offsite, totalHours, payRate
+  },
+  "supervisor": {
+    "email": ...
+  },
+  "prompts": {
+    "rating": ...,
+
+  },
+  "fi": {
+  }
+}

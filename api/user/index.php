@@ -82,28 +82,23 @@ function register($data)
         'email',
         'phone');
 
-    _sanitize_user_request($data);
+    if ($data['userGroup'] == 'student')
+        // api_require_data($data, 'advisorId');
+        $data['advisorId'] = 2;
+    else
+        $data['advisorId'] = null;
 
-    if (!_validate_user_request($data)) {
-        exit_response(false, 'Invalid user data');
-    } else {
-        if ($data['userGroup'] == 'student')
-            api_require_data($data, 'advisorId');
-        else
-            $data['advisorId'] = null;
+    AuthService::register(
+        $data['login'],
+        $data['passwd'],
+        $data['userGroup'],
+        $data['advisorId'],
+        $data['firstName'],
+        $data['lastName'],
+        $data['email'],
+        $data['phone']);
 
-        AuthService::register(
-            $data['login'],
-            $data['passwd'],
-            $data['advisorId'],
-            $data['userGroup'],
-            $data['firstName'],
-            $data['lastName'],
-            $data['email'],
-            $data['phone']);
-
-        exit_response(true, 'User successfully created');
-    }
+    exit_response(true, 'User successfully created');
 }
 
 /**

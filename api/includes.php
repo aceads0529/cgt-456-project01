@@ -19,7 +19,7 @@ function exit_response($success, $message = '', $data = null)
 
         DataService::insert('api_log', [
             'request_uri' => $_SERVER['REQUEST_URI'],
-            'action' => $_REQUEST['action'],
+            'action' => isset($_REQUEST['action']) ? $_REQUEST['action'] : null,
             'user_id' => $user_id,
             'success' => (int)$success,
             'message' => $message,

@@ -63,33 +63,33 @@ safe_session_start();
             });
         });
 
-        const form = {
-            employer: {
-                name: "Company ABC",
-                address: "105 Churchman Bypass",
-                cgt_field_ids: [1],
-            },
-            session: {
-                jobTitle: "Research Assistant",
-                startDate: "2018-12-20",
-                endDate: "2019-05-29",
-                offsite: false,
-                totalHours: 340,
-                payRate: 17.60
-            },
-            supervisor: {
-                email: "supervisor@email.com"
-            },
-            prompts: {
-                rating: 4,
-                relevantWork: "",
-                difficulties: "",
-                relatedToMajor: "",
-                wantedToLearn: "",
-                cgtChangedMind: "",
-                providedContacts: ""
-            }
-        };
+        // const form = {
+        //     employer: {
+        //         name: "Company ABC",
+        //         address: "105 Churchman Bypass",
+        //         cgt_field_ids: [1],
+        //     },
+        //     session: {
+        //         jobTitle: "Research Assistant",
+        //         startDate: "2018-12-20",
+        //         endDate: "2019-05-29",
+        //         offsite: false,
+        //         totalHours: 340,
+        //         payRate: 17.60
+        //     },
+        //     supervisor: {
+        //         email: "supervisor@email.com"
+        //     },
+        //     prompts: {
+        //         rating: 4,
+        //         relevantWork: "",
+        //         difficulties: "",
+        //         relatedToMajor: "",
+        //         wantedToLearn: "",
+        //         cgtChangedMind: "",
+        //         providedContacts: ""
+        //     }
+        // };
 
         // api.call('form/student', form, function (response) {
         //     console.log(response);

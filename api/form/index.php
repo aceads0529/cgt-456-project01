@@ -11,6 +11,9 @@ try {
         case 'student':
             student($data);
             break;
+        case 'supervisor':
+            supervisor($data);
+            break;
     }
 
 } catch (Exception $e) {
