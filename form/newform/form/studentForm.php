@@ -41,6 +41,12 @@ echo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 						<input id="companyAddress" type="text" class="form-control" name="companyAddress">
 					</div>
 				</div>
+			<label class="control-label col-md-4">Email of your Supervisor </label>
+				<div class="row">
+					<div class="col-md-4">
+						<input id="email" type="email" class="form-control" name="supEmail">
+					</div>
+				</div>
 			<div class="row">
 				<label class="control-label col-md-8">Type/Sector of CGT Industry - select all that apply </label>
 			</div>
@@ -166,34 +172,34 @@ echo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			</div>
 			<label class="control-label col-md-12" style="margin-bottom: 20px;">Did the supervisor give you relevant work to accomplish? Specify! </label>
 			<div class="md-form">
-  				<textarea id="relaventWork" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
+  				<textarea id="relevantWork" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
 			</div>
 			<label class="control-label col-md-12" style="margin-bottom: 20px;">Difficulties or problem areas encountered during internship. </label>
 			<div class="md-form">
-  				<textarea id="problems" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
+  				<textarea id="difficulties" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
 			</div>
 			<label class="control-label col-md-12" style="margin-bottom: 20px;">Explain how work experience related to your major. </label>
 			<div class="md-form">
-  				<textarea id="related" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
+  				<textarea id="relatedToMajor" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
 			</div>
 			<label class="control-label col-md-12" style="margin-bottom: 20px;">Is there anything you wanted to learn during internship that you were not able to? </label>
 			<div class="md-form">
-  				<textarea id="learn" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
+  				<textarea id="wantedToLearn" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
 			</div>
 			<label class="control-label col-md-12" style="margin-bottom: 20px;">Has this work experience changed your mind about which sector of CGT you might be most interested in pursuing? </label>
 			<div class="md-form">
-  				<textarea id="changeMind" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
+  				<textarea id="cgtChangedMind" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
 			</div>
 			<label class="control-label col-md-12" style="margin-bottom: 20px;">Did the internship provide you with contacts which may lead to future employment? </label>
 			<div class="md-form">
-  				<textarea id="contact" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
+  				<textarea id="providedContacts" type="text" class="md-textarea form-control" rows="1" style="margin-bottom: 20px;"></textarea>
 			</div>
 			<label class="control-label col-md-12" style="margin-bottom: 20px;">Considering your overall experience, how would you rate this internship? </label>
-				<input id="rate" class="form-check-input radio-inline" type="radio" name="rating">Very Dissatisfied
-				<input id="rate" class="form-check-input radio-inline" type="radio" name="rating">Dissatisfied
-				<input id="rate" class="form-check-input radio-inline" type="radio" name="rating">Neutral
-				<input id="rate" class="form-check-input radio-inline" type="radio" name="rating">Satisfied
-				<input id="rate" class="form-check-input radio-inline" type="radio" name="rating">Very Satisfied
+				<input id="rating" class="form-check-input radio-inline" type="radio" name="rating" value="veryDissatisfied">Very Dissatisfied
+				<input id="rating" class="form-check-input radio-inline" type="radio" name="rating" value="dissatisfied">Dissatisfied
+				<input id="rating" class="form-check-input radio-inline" type="radio" name="rating" value="neutral">Neutral
+				<input id="rating" class="form-check-input radio-inline" type="radio" name="rating" value="satisfied">Satisfied
+				<input id="rating" class="form-check-input radio-inline" type="radio" name="rating" value="verySatisfied">Very Satisfied
 			</fieldset>
 			<fieldset>
 			<h2>Salary/Hourly Rate </h2>
@@ -277,8 +283,36 @@ echo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			const payRate = $('#payRate').val();		
 			//supervisor
 			const workSessionID = '';
+			const email = $('#email').val();
 			//prompts
+			const rating = $('#rating').val();
+			const relevantWork = $('#relevantWork').val();
+			const difficulties = $('#difficulties').val();
+			const relatedToMajor = $('#relatedToMajor').val();
+			const wantedToLearn = $('#wantedToLearn').val();
+			const cgtChangedMind = $('#cgtChangedMind').val();
+			const providedContacts = $('#providedContacts').val();
 			//fi
+
+			//I don't know where these goes
+			const activity = $('#activity1').val();
+			const ifPaid = $('#ifPaid').val();
+			const housing = $('#housing').val();
+			const assistance = [
+				'perDiem',
+				'gas',
+				'vehicle',
+				'airfare',
+				'other',
+			];
+			var selectedAssistance = [];
+			for (const g of assistance) {
+				if ($('#' + g).prop('checked')) {
+					selectedAssistance.push(g);
+				}
+			}
+
+
 
 			const data = {
 				employer:{
@@ -287,13 +321,25 @@ echo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 					cgtFieldIds: selectedFields 
 				},
 				session:{
-
+					jobTitle: jobTitle,
+					startDate: startDate,
+					endDate: endDate,
+					offsite: offsite,
+					totalHours: totalHours,
+					payRate: payRate
 				},
 				supervisor:{
-
+					workSessionID: workSessionID,
+					email: email
 				},
 				prompts:{
-
+					rating: rating,
+					relevantWork: relevantWork,
+					difficulties: difficulties,
+					relatedToMajor: relatedToMajor,
+					wantedToLearn: wantedToLearn,
+					cgtChangedMind: cgtChangedMind,
+					providedContacts: providedContacts
 				},
 				fi:{
 
