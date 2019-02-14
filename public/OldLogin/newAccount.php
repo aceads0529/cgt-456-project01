@@ -30,8 +30,44 @@ echo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 				<li> <label title="Password" for="password">Password<span>*</span></label> <input type="password" name="password" id="password" size="30" maxlength="30" /></li>
 				<li> <label title="Firstname" for="firstname">First Name<span>*</span></label> <input type="text" name="firstname" id="firstname" size="30" maxlength="30" /></li>
 				<li> <label title="Lastname" for="lastname">Last Name<span>*</span></label> <input type="text" name="lastname" id="lastname" size="30" maxlength="30" /></li>
-				<li> <label title="Email" for="email">Email<span>*</span></label> <input type="email" name="email" id="email" size="30" maxlength="30" /></li>
+				<li><label class="control-label col-md-4">Campus</label>
+				    <div class="row">
+					    <div class="col-md-4">
+					    <select  id="campus" name="campus">
+						    <option value="westLafayette">West Lafayette</option>
+						    <option value="fortWayne">Fort Wayne</option>
+						    <option value="iupui">IUPUI</option>
+						    <option value="northwest">Northwest</option>
+						    <option value="other">Other</option>
+					    </select>
+					    </div>
+				    </div>
+                </li>
+                <li> <label title="Email" for="email">Email<span>*</span></label> <input type="email" name="email" id="email" size="30" maxlength="30" /></li>
 				<li> <label title="Phone" for="phone">Phone<span>*</span></label> <input type="number" name="phone" id="phone" size="30" maxlength="30" /></li>
+                <li><label class="control-label col-md-4">Academic Advisor: </label>
+				    <div class="row">
+					    <div class="col-md-4">
+					    <select  id="advisor" name="advisor">
+						    <option value="oneal">T.R. Oneal</option>
+						    <option value="mayorga">Heather Mayorga</option>
+						    <option value="other">Other</option>
+					    </select>
+					    </div>
+				    </div>
+                </li>
+                <li><label class="control-label col-md-4">Student Classification at Purdue: </label>
+				    <div class="row">
+					    <div class="col-md-4">
+					    <select id="class" name="class">
+						    <option value="freshman">Freshman</option>
+						    <option value="freshman">Sophomore</option>
+						    <option value="freshman">Junior</option>
+						    <option value="freshman">Senior</option>
+					    </select>
+					    </div>
+				    </div>
+                </li>
 				<li><span><?php echo $_SESSION["errorMessage"]; ?></span></li>
 				<li><button  id="submit" name="submit" type="submit">Create</button></li>
        		</ul>
@@ -48,14 +84,20 @@ echo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
             // Get HTML form varibles
             const login = $('#login').val();
             const password = $('#password').val();
+            const userGroupId = 'student';
 			const firstname = $('#firstname').val();
             const lastname = $('#lastname').val();
+            const campus = $('#campus').val();
             const email = $('#email').val();
 			const phone = $('#phone').val();
-            const userGroupId = 'student';
+            const advisor = $('#advisor').val();
+            const class = $('#class').val();
+
+            const data = {login: login, password: password, userGroupId: userGroupId, 
+            firstname: firstname, lastname: lastname, campus: campus, email: email, phone: phone, advisor: advisor, class: class};
 
             // Make API call
-            api.call('user/register', {login: login, password: password, userGroupId: userGroupId, firstname: firstname, lastname: lastname, email: email, phone: phone}, function (response) {
+            api.call('user/register', {data}, function (response) {
                 // Determine whether username and password a correct
                 if (response.success) {
                     // If there was no error, reload the page
