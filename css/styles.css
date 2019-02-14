@@ -1,0 +1,200 @@
+/* Headers, imports, variables */
+@font-face {
+  font-family: 'Champion Welterweight';
+  src: url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: 'Champion-HTF-Welterweight';
+  src: url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/E4DB780C093CE14E3.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: 'Champion Heavyweight';
+  src: url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: 'Champion-HTF-Heavyweight';
+  src: url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/513DCFF5E1F802522.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: 'Champion Lightweight';
+  src: url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: 'Champion-HTF-Lightweight';
+  src: url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff2") format("woff2"), url("https://www.purdue.edu/purdue/fonts/BA614B8650880A570.woff") format("woff");
+  font-weight: 400;
+  font-style: normal; }
+/*
+	clear formatting
+
+	Source: https://css-tricks.com/snippets/sass/power-function/
+	Author: Hugo Giraudel (https://css-tricks.com/author/hugogiraudel/)
+*/
+html, body, div, span, applet, object, iframe, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+input:focus, select:focus, textarea:focus, button:focus {
+  outline: none; }
+
+/* general styles */
+html {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: black; }
+
+h1 {
+  font-family: "Champion Welterweight", "Archivo Black", "Arial Black", "Arial Bold", sans-serif;
+  color: #98700d; }
+
+/*# sourceMappingURL=general.css.map */
+/* Styles for studentForm.php */
+h2 {
+  text-align: center;
+}
+input {
+  font-size: 1rem; 
+}
+
+input::placeholder {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: italic; }
+
+input::-webkit-input-placeholder {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: italic; }
+
+input.long {
+  width: 100%; }
+
+input.submit {
+  font-family: "Champion Welterweight", "Archivo Black", "Arial Black", "Arial Bold", sans-serif;
+  font-size: 1.5rem;
+  padding: .5rem;
+  background: #5b6870;
+  color: white;
+  border: none; }
+
+input.submit:hover {
+  background: #98700d;
+  cursor: pointer; }
+
+/*
+input[type="radio"] {
+  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.customradio {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 1rem;
+  width: 1rem;
+  background: $c-purdueEverBlue;
+  border-radius: 50%;
+}
+
+.customradio:hover {
+
+
+
+}*/
+select {
+  border: 1px solid grey;
+  font-size: 1rem;
+  font-weight: bold;
+  background: #fcfcfc;
+  padding: .25rem;
+  margin-left: .5rem; }
+
+fieldset {
+  border: none;
+  border-top: 8px solid #98700d;
+  padding-top: .5rem;
+  padding-bottom: 1rem; }
+
+.banner-holder img {
+  width: 33%;
+  display:block;
+  margin:auto;
+}
+
+.banner-holder {
+  padding-bottom: 30px;
+}
+.row {
+  padding: 10px;
+}
+/* CSS for Index Page */
+/* reminders:
+  ch is width of 0 in font
+  em is height of font
+
+*/
+header {
+  background-color: #98700d;
+  height: 100px;
+  margin-bottom: 20px; 
+}
+
+header img {
+  height: 100px;
+  margin: 10px; }
+
+body {
+  background: repeating-linear-gradient(45deg, black, black 16px, #5B6870 16px, #5B6870 17px);
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0; }
+
+section#content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 50ch;
+  max-width: 100ch;
+  background: white;
+  padding: 1em; }
+
+#titleText {
+  line-height: 3rem;
+  padding-left: 3rem; }
+
+#titleRibbon {
+  background: transparent;
+  height: 0px;
+  width: 25ch;
+  max-width: 75ch;
+  border-top: 1.5em solid white;
+  border-bottom: 1.5em solid white;
+  border-left: 1.5em solid transparent;
+  border-right: 1.5em solid transparent;
+  position: absolute;
+  z-index: -1; }
+.summers {
+  margin-left: 10px;
+}
+input [type=checkbox] {
+  vertical-align: middle;
+}
+.control-label col-md-6 {
+  margin-bottom: 20px;
+}
+.col-md-4 p {
+  font-weight: bold;
+}
+.submit {
+  float: right;
+}
