@@ -199,8 +199,8 @@ echo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			<h2>Salary/Hourly Rate </h2>
        		<div class="row">
        			<label class="control-label col-md-6">Were you paid? </label>
-            		<input id="ifPaid" class="form-check-input radio-inline" type="radio" name="paid" id="gridRadios1" value="option1" checked> Yes
-            		<input id="ifPaid" class="form-check-input radio-inline" type="radio" name="paid" id="gridRadios2" value="option2"> No
+            		<input id="ifPaid" class="form-check-input radio-inline" type="radio" name="paid" id="gridRadios1" value="yes" checked> Yes
+            		<input id="ifPaid" class="form-check-input radio-inline" type="radio" name="paid" id="gridRadios2" value="no"> No
         	</div>
         	<div class="row"> 
 				<label class="control-label col-md-4">If so, how much? </label>
@@ -210,31 +210,31 @@ echo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 			</div>
 			<div class="row"> 
 				<label class="control-label col-md-6" style="margin-bottom: 20px;">Did you receive a housing stipend? </label>
-					<input id="housing" class="form-check-input radio-inline" type="radio" name="housingStipend">Yes
-					<input id="housing" class="form-check-input radio-inline" type="radio" name="housingStipend">No
+					<input id="housing" class="form-check-input radio-inline" type="radio" name="housingStipend" value="yes">Yes
+					<input id="housing" class="form-check-input radio-inline" type="radio" name="housingStipend" value="no">No
 			</div>
 			<div class="row">
 				<label class="control-label col-md-12">Did you receive any assistance from the company for your internship? Please select all that apply </label>
 			</div>
 				<div class="col-md-12">
       				<label class="checkbox-inline col-md-4" style="margin-bottom: 10px;">
-        				<input type="checkbox" id="inlineCheckbox1" value="allowance"> Per Diem Allowance
+        				<input id="perDiem" type="checkbox" id="inlineCheckbox1" value="allowance"> Per Diem Allowance
       				</label>
       				<label class="checkbox-inline col-md-4" style="margin-bottom: 10px;">
-        				<input type="checkbox" id="inlineCheckbox1" value="gas"> Gas Reimbursement
-      				</label>
-      			</div>
-      			<div class="col-md-12">
-      				<label class="checkbox-inline col-md-4" style="margin-bottom: 10px;">
-        				<input type="checkbox" id="inlineCheckbox1" value="vehicle"> Company Vehicle
-      				</label>
-      				<label class="checkbox-inline col-md-4" style="margin-bottom: 10px;">
-        				<input type="checkbox" id="inlineCheckbox1" value="airfare"> Paid Airfare/Transportation
+        				<input id="gas" type="checkbox" id="inlineCheckbox1" value="gas"> Gas Reimbursement
       				</label>
       			</div>
       			<div class="col-md-12">
       				<label class="checkbox-inline col-md-4" style="margin-bottom: 10px;">
-        				<input type="checkbox" id="inlineCheckbox1" value="other"> Other
+        				<input id="vehicle" type="checkbox" id="inlineCheckbox1" value="vehicle"> Company Vehicle
+      				</label>
+      				<label class="checkbox-inline col-md-4" style="margin-bottom: 10px;">
+        				<input id="airfare" type="checkbox" id="inlineCheckbox1" value="airfare"> Paid Airfare/Transportation
+      				</label>
+      			</div>
+      			<div class="col-md-12">
+      				<label class="checkbox-inline col-md-4" style="margin-bottom: 10px;">
+        				<input id="other" type="checkbox" id="inlineCheckbox1" value="other"> Other
       				</label>
       			</div>
       			<input type="submit" name="submit" class="submit" value="Submit"/>
@@ -269,15 +269,14 @@ echo("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 				}
 			}
 			//session
-			const anim = $('#anim').val();
-			const construction = $('#construction').val();
-			const dataviz = $('#dataviz').val();
-			const game = $('#game').val();
-			const ux = $('#ux').val();
-			const vfx = $('#vfx').val();
-			const vpi = $('#vpi').val();
-			const web = $('#web').val();
+			const jobTitle = $('#jobTitle').val();
+			const startDate = $('#startDate').val();
+			const endDate = $('#endDate').val();
+			const offsite = $('#offsite').val();
+			const totalHours = $('#total_amount').val();
+			const payRate = $('#payRate').val();		
 			//supervisor
+			const workSessionID = '';
 			//prompts
 			//fi
 
