@@ -3,27 +3,21 @@
 	<head>
     	<meta http-equiv="Content-Type" content="text/html; UTF-8" />
     	<meta name="viewport" content="width=device-width, initial-scale=.75">
-    	<link rel="stylesheet" type="text/css" href="css/general.css" />
-    	<link rel="stylesheet" type="text/css" href="css/index.css" />
-    	<link rel="stylesheet" type="text/css" href="css/studentForm.css" />
+    	<link rel="stylesheet" type="text/css" href="css/styles.css" />
 		<title>CGT 456 | Project 1</title> 
 	</head>
 	<body>
-	<header>
-
-			<div id="titleHeader">
-
-				<div id="titleRibbon"></div>
-
-				<h1 id="titleText">Index Header</h1>
-
-			</div>
+		<header>
+			<img src="https://polytechnic.purdue.edu/sites/default/files/files/MM-Polyt-H-B-RGB.png">
+			
 
 		</header>
-		
+
 		<section id="content">
+
+
 			<div id="formContainer">
-				<?php include 'form/studentForm.php'; ?>
+				<?php include("includes/menu.php");  ?>
 			</div>
 
 		</section>
